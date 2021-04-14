@@ -16,11 +16,14 @@ namespace LegoBuildingInstruction.Models
         public string PdfInstructionUrl { get; set; }
         public string ImageThumbnailUrl { get; set; }
         public string VideoUrl { get; set; }
+        public int CategoryId { get; set; }
         public Category Category { get; set; }
         public int Pages { get; set; }
         public string Set { get; set; }
         public string ProgramUrl { get; set; }
         public int Rating { get; set; }
+
+        public int DifficultyLevelId { get; set; }
         public DifficultyLevel DifficultyLevel { get; set; }
 
     }
