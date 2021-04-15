@@ -30,7 +30,9 @@ namespace LegoBuildingInstruction
 
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IBuildingInstructionRepository, BuildingInstructionRepository>();
+            services.AddScoped<IDifficultyRepository, DifficultyRepository>();
             services.AddControllersWithViews();
         }
 

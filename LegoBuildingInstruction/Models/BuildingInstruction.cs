@@ -21,7 +21,9 @@ namespace LegoBuildingInstruction.Models
         public int Pages { get; set; }
         public string Set { get; set; }
         public string ProgramUrl { get; set; }
-        public int Rating { get; set; }
+        public float Rating { get; set; }
+
+        public int NumberOfPeopleRating { get; set; }
 
         public int DifficultyLevelId { get; set; }
         public DifficultyLevel DifficultyLevel { get; set; }

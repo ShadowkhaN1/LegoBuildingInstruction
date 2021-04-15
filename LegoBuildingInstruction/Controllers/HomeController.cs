@@ -1,15 +1,27 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LegoBuildingInstruction.Models;
+using LegoBuildingInstruction.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
-namespace BethanysPieShop.Controllers
+namespace LegoBuildingInstruction.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IBuildingInstructionRepository _buildingInstructionRepository;
+
+        public HomeController(IBuildingInstructionRepository buildingInstructionRepository)
+        {
+            _buildingInstructionRepository = buildingInstructionRepository;
+        }
 
         public IActionResult Index()
         {
-          
 
-            return View();
+            var homeViewModel = new HomeViewModel
+            {
+                TopRatedLegoBuildingInstructions = _buildingInstructionRepository.TopRatedBuildingInstructions
+            };
+
+            return View(homeViewModel);
         }
     }
 }

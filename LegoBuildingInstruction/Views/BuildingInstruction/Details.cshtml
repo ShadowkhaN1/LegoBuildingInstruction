@@ -1,0 +1,26 @@
+﻿
+@model BuildingInstruction
+
+<h2>@Model.Name</h2>
+
+<div class="thumbnail">
+    @*<img alt="@Model.Name" src="@Url.Content(@Model.ImageUrl)">*@
+    <div class="iframe-container">
+        <iframe width="850" height="415" src="@Model.VideoUrl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+    </div>
+    <div class="caption-full">
+        <h3 class="pull-right"><span class="glyphicon glyphicon-list-alt"></span>Pages: @Model.Pages</h3>
+        <h3>
+            <a href="#">@Model.Name</a>
+        </h3>
+        <h4>@Model.ShortDescription</h4>
+        <p>@Model.LongDescription</p>
+        <div class="addToCart">
+            <p class="button">
+                <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToShoppingCart"
+                   asp-route-pieId="@Model.Pages">Add to cart</a>
+            </p>
+        </div>
+    </div>
+</div>

@@ -50,6 +50,8 @@ namespace LegoBuildingInstruction.Models
                 LongDescription = "Robot picking up items. The robot detects the object itself using the color sensor.",
                 DifficultyLevelId = 2,
                 ImageThumbnailUrl = "~/Images/LifterSmall.png",
+                Rating = 4.5f,
+                NumberOfPeopleRating = 2
 
             });
 
@@ -67,6 +69,8 @@ namespace LegoBuildingInstruction.Models
                 LongDescription = "Robot picking up items. The robot detects the object itself using the color sensor.",
                 DifficultyLevelId = 1,
                 ImageThumbnailUrl = "~/Images/ColorSegregationSmall.png",
+                Rating = 5,
+                NumberOfPeopleRating = 3
 
             });
         }

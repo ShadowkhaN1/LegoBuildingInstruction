@@ -43,6 +43,9 @@ namespace LegoBuildingInstruction.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("NumberOfPeopleRating")
+                        .HasColumnType("int");
+
                     b.Property<int>("Pages")
                         .HasColumnType("int");
 
@@ -52,8 +55,8 @@ namespace LegoBuildingInstruction.Migrations
                     b.Property<string>("ProgramUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
+                    b.Property<float>("Rating")
+                        .HasColumnType("real");
 
                     b.Property<string>("Set")
                         .HasColumnType("nvarchar(max)");
@@ -82,8 +85,9 @@ namespace LegoBuildingInstruction.Migrations
                             ImageUrl = "~/Images/Lifter.png",
                             LongDescription = "Robot picking up items. The robot detects the object itself using the color sensor.",
                             Name = "Lifter",
+                            NumberOfPeopleRating = 2,
                             Pages = 52,
-                            Rating = 0,
+                            Rating = 4.5f,
                             Set = "45544 + 45560",
                             ShortDescription = "Pick up objects!",
                             VideoUrl = "~/Video/LifterVideo.mp4"
@@ -97,8 +101,9 @@ namespace LegoBuildingInstruction.Migrations
                             ImageUrl = "~/Images/ColorSegregation.png",
                             LongDescription = "Robot picking up items. The robot detects the object itself using the color sensor.",
                             Name = "Color Segregation",
+                            NumberOfPeopleRating = 3,
                             Pages = 24,
-                            Rating = 0,
+                            Rating = 5f,
                             Set = "45544",
                             ShortDescription = "Pick up objects!",
                             VideoUrl = "~/Video/ColorSegregationVideo.mp4"

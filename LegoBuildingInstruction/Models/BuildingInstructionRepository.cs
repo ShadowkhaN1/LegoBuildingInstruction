@@ -16,6 +16,8 @@ namespace LegoBuildingInstruction.Models
 
         public IEnumerable<BuildingInstruction> AllBuildingInstructions => _appDbContext.BuildingInstructions;
 
+        public IEnumerable<BuildingInstruction> TopRatedBuildingInstructions => _appDbContext.BuildingInstructions.OrderByDescending(b => b.Rating);
+
         public BuildingInstruction GetBuildingInstructionById(int id)
         {
 
