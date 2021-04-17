@@ -5,7 +5,7 @@
 
 body {
     padding-top: 70px;
-    Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. background-image: url('/images/pattern.png');
+    /*Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. background-image: url('/images/pattern.png');*/
     background-repeat: repeat;
     font-family: 'Source Sans Pro', sans-serif;
 }
@@ -60,8 +60,8 @@ footer {
 }
 
 .navbar-inverse {
-    background-color: #408080;
-    border-color: #408080;
+    background-color: black;
+    border-color: black;
 }
 
 .nav.navbar-nav.navbar-right li a {

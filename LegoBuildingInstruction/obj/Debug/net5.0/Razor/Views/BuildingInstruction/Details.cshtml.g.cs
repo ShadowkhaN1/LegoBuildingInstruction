@@ -26,8 +26,15 @@ using LegoBuildingInstruction.ViewModels;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\Views\_ViewImports.cshtml"
+using LegoBuildingInstruction.Components;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"39d30be5ae5f5dc4b72f4b4a2351237084e87443", @"/Views/BuildingInstruction/Details.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"48dac40dc788e2754a12a1da471608b6a93130ac", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9664e2fb102344743923cdbe55b48e149d6ccc87", @"/Views/_ViewImports.cshtml")]
     public class Views_BuildingInstruction_Details : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<BuildingInstruction>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("btn btn-primary"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -114,7 +121,7 @@ WriteAttributeValue("", 232, Model.VideoUrl, 232, 15, false);
 #line hidden
 #nullable disable
             WriteLiteral("</p>\r\n        <div class=\"addToCart\">\r\n            <p class=\"button\">\r\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "39d30be5ae5f5dc4b72f4b4a2351237084e874436709", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "39d30be5ae5f5dc4b72f4b4a2351237084e874436931", async() => {
                 WriteLiteral("Add to cart");
             }
             );

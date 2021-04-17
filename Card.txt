@@ -1,0 +1,21 @@
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <img src="@Url.Content(Model.ImageThumbnailUrl)" alt="Image">
+        <div class="caption">
+            <h4 style="font-weight: bold" class="pull-right">Pages: @Model.Pages</h4>
+            <h3>
+                <a asp-controller="BuildingInstruction" asp-action="Details" asp-route-id="@Model.Id">@Model.Name</a>
+                
+            </h3>
+            <p>@Model.ShortDescription</p>
+        </div>
+        <div class="addToCart">
+            <p class="button">
+                <a class="btn btn-primary"
+                   asp-controller="ShoppingCart"
+                   asp-action="AddToShoppingCart"
+                   asp-route-pieId="@Model.PdfInstructionUrl">Get Instruction</a>
+            </p>
+        </div>
+    </div>
+</div>

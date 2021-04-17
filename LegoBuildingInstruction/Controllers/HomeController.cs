@@ -1,20 +1,28 @@
 ﻿using LegoBuildingInstruction.Models;
 using LegoBuildingInstruction.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace LegoBuildingInstruction.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IBuildingInstructionRepository _buildingInstructionRepository;
+        private readonly IDifficultyRepository _difficultyRepository;
 
-        public HomeController(IBuildingInstructionRepository buildingInstructionRepository)
+        public HomeController(IBuildingInstructionRepository buildingInstructionRepository, IDifficultyRepository difficultyRepository)
         {
             _buildingInstructionRepository = buildingInstructionRepository;
+            _difficultyRepository = difficultyRepository;
         }
 
         public IActionResult Index()
         {
+            foreach (var topRatedBuildingInstructions in _buildingInstructionRepository.TopRatedBuildingInstructions)
+            {
+                topRatedBuildingInstructions.DifficultyLevel = _difficultyRepository.AllDifficultyLevels.FirstOrDefault(d => d.Id == topRatedBuildingInstructions.DifficultyLevelId);
+            }
+
 
             var homeViewModel = new HomeViewModel
             {

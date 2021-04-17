@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Category>
+
+
+
+
+    <h1 class="my-4">Building instruction</h1>
+    <div class="list-group">
+
+
+        @foreach (var category in Model)
+        {
+            <a href="#" class="list-group-item">@category.CategoryName</a>
+
+        }
+
+        @*<a href="#" class="list-group-item">WeDo 2.0</a>*@
+        @*  <a href="#" class="list-group-item">Power Function</a>*@
+    </div>
+
+    <a href="#" class="list-group-item">View all instructions</a>
+

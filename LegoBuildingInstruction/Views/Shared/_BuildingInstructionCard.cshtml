@@ -1,24 +1,19 @@
 ﻿@model BuildingInstruction
 
 
-<div class="col-sm-4 col-lg-4 col-md-4">
-    <div class="thumbnail">
-        <img src="@Url.Content(Model.ImageThumbnailUrl)" alt="Image">
-        <div class="caption">
-            <h3 class="pull-right">Pages: @Model.Pages</h3>
-            <h3>
-                <a asp-controller="BuildingInstruction" asp-action="Details" asp-route-id="@Model.Id">@Model.Name</a>
-                
-            </h3>
-            <p>@Model.ShortDescription</p>
+<div class="col-lg-4 col-md-6 mb-4">
+    <div class="card h-100">
+        <a href="#"><img class="card-img-top" src="@Url.Content(Model.ImageThumbnailUrl)" alt=""></a>
+        <div class="card-body">
+            <h4 class="card-title">
+                <a href="#">@Model.Name</a>
+            </h4>
+            <h6>Pages: @Model.Pages</h6>
+            <h6>Dificculty: @Model.DifficultyLevel.Name</h6>
+            <p class="card-text">@Model.ShortDescription</p>
         </div>
-        <div class="addToCart">
-            <p class="button">
-                <a class="btn btn-primary"
-                   asp-controller="ShoppingCart"
-                   asp-action="AddToShoppingCart"
-                   asp-route-pieId="@Model.PdfInstructionUrl">Get Instruction</a>
-            </p>
+        <div class="card-footer">
+            <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
         </div>
     </div>
 </div>
