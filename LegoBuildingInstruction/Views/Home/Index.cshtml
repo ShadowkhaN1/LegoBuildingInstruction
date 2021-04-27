@@ -1,17 +1,20 @@
 ﻿
 @model HomeViewModel
 
+<div class="container">
+    <partial name="_Carousel" />
 
-<partial name="_Carousel" />
+    <h2>Top rated building instruction!</h2>
 
-<h2>Top rated building instruction!</h2>
 
-<div class="row">
+    <div class="row">
 
-    @foreach (var buildingInstruction in Model.TopRatedLegoBuildingInstructions.ToList().Take(5))
-    {
-        <partial name="_BuildingInstructionCard" model="buildingInstruction" />
-    }
+        @foreach (var buildingInstruction in Model.TopRatedLegoBuildingInstructions.ToList().Take(5))
+        {
+            <partial name="_BuildingInstructionCard" model="buildingInstruction" />
+        }
 
+    </div>
 </div>
+
 

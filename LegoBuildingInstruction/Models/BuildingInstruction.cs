@@ -28,5 +28,8 @@ namespace LegoBuildingInstruction.Models
         public int DifficultyLevelId { get; set; }
         public DifficultyLevel DifficultyLevel { get; set; }
 
+
+        public List<Comment> Comments { get; set; }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace LegoBuildingInstruction.Models
             _appDbContext = appDbContext;
         }
 
-        public IEnumerable<BuildingInstruction> AllBuildingInstructions => _appDbContext.BuildingInstructions;
+        public IEnumerable<BuildingInstruction> AllBuildingInstructions => _appDbContext.BuildingInstructions.Include(c => c.Category).Include(d => d.DifficultyLevel);
 
         public IEnumerable<BuildingInstruction> TopRatedBuildingInstructions => _appDbContext.BuildingInstructions.OrderByDescending(b => b.Rating);
 

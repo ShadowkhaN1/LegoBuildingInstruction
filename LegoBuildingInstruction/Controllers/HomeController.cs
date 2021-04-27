@@ -18,10 +18,6 @@ namespace LegoBuildingInstruction.Controllers
 
         public IActionResult Index()
         {
-            foreach (var topRatedBuildingInstructions in _buildingInstructionRepository.TopRatedBuildingInstructions)
-            {
-                topRatedBuildingInstructions.DifficultyLevel = _difficultyRepository.AllDifficultyLevels.FirstOrDefault(d => d.Id == topRatedBuildingInstructions.DifficultyLevelId);
-            }
 
 
             var homeViewModel = new HomeViewModel

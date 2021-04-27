@@ -1,0 +1,35 @@
+﻿
+
+@model BuildingInstructionListViewModel;
+
+<style>
+</style>
+
+
+<div class="container mt-2">
+
+    <h2 class="text-center">@Model.CurrentCategory</h2>
+
+
+    <div class="row">
+
+
+        @if (Model.BuildingInstructions.Count() == 0)
+        {
+            <h2>No Building Instructions.</h2>
+        }
+        else
+        {
+
+
+            @foreach (var buildingInstruction in Model.BuildingInstructions)
+            {
+
+                <partial name="_BuildingInstructionCard" model="buildingInstruction" />
+
+            }
+        }
+
+    </div>
+
+</div>

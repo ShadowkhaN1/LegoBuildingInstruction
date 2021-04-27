@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LegoBuildingInstruction.Models
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<User>
     {
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
@@ -18,6 +19,7 @@ namespace LegoBuildingInstruction.Models
         public DbSet<Category> Categories { get; set; }
         public DbSet<DifficultyLevel> DifficultyLevels { get; set; }
 
+        public DbSet<Comment> Comments { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -69,6 +71,46 @@ namespace LegoBuildingInstruction.Models
                 LongDescription = "Robot picking up items. The robot detects the object itself using the color sensor.",
                 DifficultyLevelId = 1,
                 ImageThumbnailUrl = "~/Images/ColorSegregationSmall.png",
+                Rating = 5,
+                NumberOfPeopleRating = 3
+
+            });
+
+
+            modelBuilder.Entity<BuildingInstruction>().HasData(new BuildingInstruction
+            {
+                Id = 3,
+                CategoryId = 2,
+                Name = "Dinosaur",
+                Pages = 40,
+                Set = "45300",
+                VideoUrl = "https://www.youtube.com/embed/aUszco5UdeU",
+                ImageUrl = "~/Images/DinosaurImageSmall.png",
+                ShortDescription = "Create a dinosaur from your lego bricks!",
+                LongDescription = "Create a dinosaur from your lego bricks!",
+                DifficultyLevelId = 1,
+                ImageThumbnailUrl = "~/Images/DinosaurImageSmall.png",
+                Rating = 5,
+                NumberOfPeopleRating = 3
+
+            });
+
+
+
+
+            modelBuilder.Entity<BuildingInstruction>().HasData(new BuildingInstruction
+            {
+                Id = 4,
+                CategoryId = 2,
+                Name = "Hit the mole",
+                Pages = 40,
+                Set = "45300",
+                VideoUrl = "https://www.youtube.com/embed/aUszco5UdeU",
+                ImageUrl = "~/Images/HitTheMole.PNG",
+                ShortDescription = "Hit the right mole at the right moment",
+                LongDescription = "Create a dinosaur from your lego bricks!",
+                DifficultyLevelId = 1,
+                ImageThumbnailUrl = "~/Images/DinosaurImageSmall.png",
                 Rating = 5,
                 NumberOfPeopleRating = 3
 
