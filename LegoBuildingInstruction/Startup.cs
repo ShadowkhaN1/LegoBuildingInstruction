@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,7 +38,7 @@ namespace LegoBuildingInstruction
             services.AddScoped<IDifficultyRepository, DifficultyRepository>();
             services.AddControllersWithViews();
 
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
         }
 

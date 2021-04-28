@@ -16,5 +16,9 @@ namespace LegoBuildingInstruction.Models
 
         public int BuildingInstructionId { get; set; }
         public BuildingInstruction BuildingInstruction { get; set; }
+
+
+
+
     }
 }
