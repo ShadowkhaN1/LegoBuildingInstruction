@@ -38,7 +38,7 @@ namespace LegoBuildingInstruction
             services.AddScoped<IDifficultyRepository, DifficultyRepository>();
             services.AddControllersWithViews();
 
-            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddIdentity<LegoUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
         }
 

@@ -4,14 +4,16 @@ using LegoBuildingInstruction.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LegoBuildingInstruction.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210428090150_User")]
+    partial class User
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -238,7 +240,7 @@ namespace LegoBuildingInstruction.Migrations
                         });
                 });
 
-            modelBuilder.Entity("LegoBuildingInstruction.Models.LegoUser", b =>
+            modelBuilder.Entity("LegoBuildingInstruction.Models.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -467,7 +469,7 @@ namespace LegoBuildingInstruction.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LegoBuildingInstruction.Models.LegoUser", "User")
+                    b.HasOne("LegoBuildingInstruction.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId1");
 
@@ -487,7 +489,7 @@ namespace LegoBuildingInstruction.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("LegoBuildingInstruction.Models.LegoUser", null)
+                    b.HasOne("LegoBuildingInstruction.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -496,7 +498,7 @@ namespace LegoBuildingInstruction.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("LegoBuildingInstruction.Models.LegoUser", null)
+                    b.HasOne("LegoBuildingInstruction.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -511,7 +513,7 @@ namespace LegoBuildingInstruction.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LegoBuildingInstruction.Models.LegoUser", null)
+                    b.HasOne("LegoBuildingInstruction.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -520,7 +522,7 @@ namespace LegoBuildingInstruction.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("LegoBuildingInstruction.Models.LegoUser", null)
+                    b.HasOne("LegoBuildingInstruction.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

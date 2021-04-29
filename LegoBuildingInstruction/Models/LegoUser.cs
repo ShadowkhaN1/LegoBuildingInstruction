@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LegoBuildingInstruction.Models
 {
-    public class User : IdentityUser
+    public class LegoUser : IdentityUser
     {
 
 

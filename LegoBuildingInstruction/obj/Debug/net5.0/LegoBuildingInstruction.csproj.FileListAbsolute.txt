@@ -156,3 +156,5 @@ C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\bin\Deb
 C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\bin\Debug\net5.0\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\obj\Debug\net5.0\Razor\Views\Account\Login.cshtml.g.cs
 C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\obj\Debug\net5.0\Razor\Views\Shared\_Navbar.cshtml.g.cs
+C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
+C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\obj\Debug\net5.0\Razor\Views\Account\Register.cshtml.g.cs

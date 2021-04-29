@@ -18,6 +18,8 @@ namespace LegoBuildingInstruction.Models
         public BuildingInstruction BuildingInstruction { get; set; }
 
 
+        public int UserId { get; set; }
+        public LegoUser User { get; set; }
 
 
     }

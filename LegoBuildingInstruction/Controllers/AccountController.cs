@@ -13,15 +13,18 @@ namespace LegoBuildingInstruction.Controllers
     public class AccountController : Controller
     {
         private readonly ILogger<AccountController> _logger;
-        private readonly SignInManager<User> _signInManager;
+        private readonly SignInManager<LegoUser> _signInManager;
+        private readonly UserManager<LegoUser> _userManager;
 
-        public AccountController(ILogger<AccountController> logger, SignInManager<User> signInManager)
+        public AccountController(ILogger<AccountController> logger, SignInManager<LegoUser> signInManager, UserManager<LegoUser> userManager)
         {
             _logger = logger;
             _signInManager = signInManager;
+            _userManager = userManager;
         }
 
 
+        [HttpGet]
         public IActionResult Login()
         {
             if (this.User.Identity.IsAuthenticated)
@@ -31,6 +34,8 @@ namespace LegoBuildingInstruction.Controllers
 
             return View();
         }
+
+
 
 
 
@@ -60,6 +65,50 @@ namespace LegoBuildingInstruction.Controllers
             ModelState.AddModelError("", "Failed to login");
 
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Register()
+        {
+            if (this.User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisteViewModel model)
+        {
+
+
+            if (ModelState.IsValid)
+            {
+                var user = new LegoUser
+                {
+                    Email = model.Email,
+                    UserName = model.UserName
+                };
+                var result = await _userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("index", "home");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+
+
+
+
+
+            return View(model);
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LegoBuildingInstruction.Models
 {
-    public class AppDbContext : IdentityDbContext<User>
+    public class AppDbContext : IdentityDbContext<LegoUser>
     {
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
