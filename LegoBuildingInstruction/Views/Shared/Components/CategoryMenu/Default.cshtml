@@ -1,28 +1,12 @@
 ﻿@model IEnumerable<Category>
 
 
-@*<h1 class="my-4">Building instruction</h1>
-    <div class="list-group">
-
-
-        @foreach (var category in Model)
-        {
-            <a asp-controller="BuildingInstruction" asp-action="List" asp-route-category="@category.CategoryName" class="list-group-item">@category.CategoryName</a>
-
-        }
-    <a href="#" class="list-group-item">WeDo 2.0</a>
-      <a href="#" class="list-group-item">Power Function</a>
-    </div>
-
-    <a asp-controller="BuildingInstruction" asp-action="List" asp-route-category="" class="list-group-item">View all instructions</a>*@
-
-
 <div class="sidebar">
     <div class="menu list-group list-group-flush">
 
 
         <a class="list-group-item list-group-item-action" asp-controller="Home" asp-action="Index" Match="NavLinkMatch.All">
-            <span class="fas fa-home" aria-hidden="true"></span> Home
+            <span class="fas fa-home " aria-hidden="true"></span> Home
         </a>
 
 
@@ -35,10 +19,10 @@
 
         }
 
-    <a class="list-group-item list-group-item-action" asp-controller="BuildingInstruction" asp-action="List" asp-route-category="">
-        <i class="fas fa-th-list" aria-hidden="true"></i> View all instructions
-        <span class="badge badge-primary badge-pill text-right">@Model.Sum(c => c.BuilidingInstructions.Count)</span>
-    </a>
+        <a class="list-group-item list-group-item-action" asp-controller="BuildingInstruction" asp-action="List" asp-route-category="">
+            <i class="fas fa-th-list" aria-hidden="true"></i> View all instructions
+            <span class="badge badge-primary badge-pill text-right">@Model.Sum(c => c.BuilidingInstructions.Count)</span>
+        </a>
 
 
     </div>

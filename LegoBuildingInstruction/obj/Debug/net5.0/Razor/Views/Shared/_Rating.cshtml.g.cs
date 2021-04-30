@@ -33,8 +33,15 @@ using LegoBuildingInstruction.Components;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Identity;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7940c856270d083acd9bb173f8d2ef3c365bbf13", @"/Views/Shared/_Rating.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9664e2fb102344743923cdbe55b48e149d6ccc87", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"05a21b49ae1dda36b9ebf0b3e777eb918381b5fa", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared__Rating : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<BuildingInstruction>
     {
         #pragma warning disable 1998

@@ -36,33 +36,29 @@ namespace LegoBuildingInstruction.Controllers
         }
 
 
-
-
-
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(model.Username,
+
+
+                var result = await _signInManager.PasswordSignInAsync(model.Email,
                   model.Password,
                   model.RememberMe,
                   false);
 
                 if (result.Succeeded)
                 {
-                    if (Request.Query.Keys.Contains("ReturnUrl"))
-                    {
-                        return Redirect(Request.Query["ReturnUrl"].First());
-                    }
-                    else
-                    {
-                        RedirectToAction("Shop", "App");
-                    }
+                    return RedirectToAction("index", "home");
                 }
+
+
+                ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
+
             }
 
-            ModelState.AddModelError("", "Failed to login");
+
 
             return View();
         }
@@ -79,7 +75,7 @@ namespace LegoBuildingInstruction.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisteViewModel model)
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
 
 
@@ -88,7 +84,9 @@ namespace LegoBuildingInstruction.Controllers
                 var user = new LegoUser
                 {
                     Email = model.Email,
-                    UserName = model.UserName
+                    UserName = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
 
@@ -100,15 +98,25 @@ namespace LegoBuildingInstruction.Controllers
 
                 foreach (var error in result.Errors)
                 {
-                    ModelState.AddModelError("", error.Description);
+                    if (!error.Description.Contains("Username"))
+                    {
+                        ModelState.AddModelError("", error.Description);
+
+                    }
                 }
             }
 
-
-
-
-
             return View(model);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+
+            await _signInManager.SignOutAsync();
+
+            return RedirectToAction("index", "home");
         }
     }
 }

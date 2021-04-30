@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace LegoBuildingInstruction.ViewModels
 {
-    public class RegisteViewModel
+    public class RegisterViewModel
     {
+
+    
 
         [Required]
         [StringLength(50)]
@@ -18,8 +20,14 @@ namespace LegoBuildingInstruction.ViewModels
         public string Email { get; set; }
 
         [Required]
-        [Display(Name = "User name")]
-        public string UserName { get; set; }
+        [Display(Name = "First name")]
+        public string FirstName { get; set; }
+
+
+        [Required]
+        [Display(Name = "Last name")]
+        public string LastName { get; set; }
+
 
         [Required]
         [DataType(DataType.Password)]

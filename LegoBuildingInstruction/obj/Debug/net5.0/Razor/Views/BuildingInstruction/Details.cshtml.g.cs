@@ -33,8 +33,15 @@ using LegoBuildingInstruction.Components;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Identity;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"f2405ed30cb0886685beaf69bb77917cbb86fa29", @"/Views/BuildingInstruction/Details.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9664e2fb102344743923cdbe55b48e149d6ccc87", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"05a21b49ae1dda36b9ebf0b3e777eb918381b5fa", @"/Views/_ViewImports.cshtml")]
     public class Views_BuildingInstruction_Details : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<BuildingInstruction>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("name", "_Rating", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -108,7 +115,7 @@ WriteAttributeValue("", 262, Model.VideoUrl, 262, 15, false);
 #line hidden
 #nullable disable
             WriteLiteral(" </p>\r\n                </div>\r\n\r\n\r\n                <div class=\"col-sm\">\r\n                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "f2405ed30cb0886685beaf69bb77917cbb86fa296254", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "f2405ed30cb0886685beaf69bb77917cbb86fa296471", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper>();
@@ -139,7 +146,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper.Model = Model;
 #line hidden
 #nullable disable
             WriteLiteral("</p>\r\n\r\n\r\n\r\n\r\n            <button class=\" btn btn-secondary btn-block\">Get Building Instruction</button>\r\n            <button class=\" btn btn-secondary btn-block\">Get Program</button>\r\n\r\n        </div>\r\n\r\n    </div>\r\n\r\n</div>\r\n\r\n");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "f2405ed30cb0886685beaf69bb77917cbb86fa298524", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "f2405ed30cb0886685beaf69bb77917cbb86fa298741", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper>();

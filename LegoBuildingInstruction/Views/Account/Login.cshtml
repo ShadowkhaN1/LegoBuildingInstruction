@@ -2,7 +2,7 @@
 @{
 
     Layout = null;
-    ViewBag.Title = "Login";
+    ViewBag.Title = "User Login";
 }
 
 
@@ -37,9 +37,6 @@
     <partial name="_Navbar" />
 
 
-   
-
-
     <div class="container pt-5">
 
         <div class="row justify-content-md-center">
@@ -52,9 +49,9 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <div class="form-group">
-                        <label asp-for="Username" class="font-weight-bold"></label>
-                        <input asp-for="Username" class="form-control" />
-                        <span asp-validation-for="Username" class="text-danger"></span>
+                        <label asp-for="Email" class="font-weight-bold"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Password" class="font-weight-bold"></label>
@@ -65,8 +62,6 @@
                         <div class="form-check">
                             <input asp-for="RememberMe" type="checkbox" class="form-check-input " />
                             <label asp-for="RememberMe" class="form-check-label font-weight-bold">Remember Me?</label>
-                            <span asp-validation-for="RememberMe" class="text-danger"></span>
-
                         </div>
                     </div>
                     <div class="form-group">

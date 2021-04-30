@@ -33,8 +33,15 @@ using LegoBuildingInstruction.Components;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\Views\_ViewImports.cshtml"
+using Microsoft.AspNetCore.Identity;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"c141adb7f1c4dc8c7b6d49a7dd57b6f8d7c48269", @"/Views/Shared/_Comment.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9664e2fb102344743923cdbe55b48e149d6ccc87", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"05a21b49ae1dda36b9ebf0b3e777eb918381b5fa", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared__Comment : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #line hidden
@@ -63,7 +70,7 @@ using LegoBuildingInstruction.Components;
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
             WriteLiteral("\r\n\r\n<section class=\"content-item\" id=\"comments\">\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-sm-12\">\r\n                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c141adb7f1c4dc8c7b6d49a7dd57b6f8d7c482693729", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c141adb7f1c4dc8c7b6d49a7dd57b6f8d7c482693946", async() => {
                 WriteLiteral(@"
                     <h3 class=""pull-left"">New Comment</h3>
 
