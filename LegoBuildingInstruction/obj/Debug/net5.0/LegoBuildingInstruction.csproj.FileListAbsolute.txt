@@ -158,3 +158,4 @@ C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\obj\Deb
 C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\obj\Debug\net5.0\Razor\Views\Shared\_Navbar.cshtml.g.cs
 C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
 C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\obj\Debug\net5.0\Razor\Views\Account\Register.cshtml.g.cs
+C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\obj\Debug\net5.0\Razor\Views\Shared\Components\CommentList\Default.cshtml.g.cs

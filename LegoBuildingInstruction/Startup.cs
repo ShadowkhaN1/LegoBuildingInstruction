@@ -36,11 +36,13 @@ namespace LegoBuildingInstruction
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IBuildingInstructionRepository, BuildingInstructionRepository>();
             services.AddScoped<IDifficultyRepository, DifficultyRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddControllersWithViews();
 
 
-     
-            services.AddIdentity<LegoUser, IdentityRole>(options =>
+          
+
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.Password.RequireDigit = false;
                 options.Password.RequireLowercase = false;

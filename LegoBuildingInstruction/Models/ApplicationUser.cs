@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace LegoBuildingInstruction.Models
 {
-    public class LegoUser : IdentityUser
+    public class ApplicationUser : IdentityUser
     {
 
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        List<Comment> Comments { get; set; }
+        public List<Comment> Comments { get; set; }
 
     }
 }

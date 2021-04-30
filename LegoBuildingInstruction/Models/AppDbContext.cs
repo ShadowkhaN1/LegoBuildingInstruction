@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LegoBuildingInstruction.Models
 {
-    public class AppDbContext : IdentityDbContext<LegoUser>
+    public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
@@ -65,7 +65,7 @@ namespace LegoBuildingInstruction.Models
                 Name = "Color Segregation",
                 Pages = 24,
                 Set = "45544",
-                VideoUrl = "~/Video/ColorSegregationVideo.mp4",
+                VideoUrl = "https://www.youtube.com/embed/lRVrWwEMntQ",
                 ImageUrl = "~/Images/ColorSegregation.png",
                 ShortDescription = "Pick up objects!",
                 LongDescription = "Robot picking up items. The robot detects the object itself using the color sensor.",
@@ -110,11 +110,13 @@ namespace LegoBuildingInstruction.Models
                 ShortDescription = "Hit the right mole at the right moment",
                 LongDescription = "Create a dinosaur from your lego bricks!",
                 DifficultyLevelId = 1,
-                ImageThumbnailUrl = "~/Images/DinosaurImageSmall.png",
+                ImageThumbnailUrl = "~/Images/HitTheMole.PNG",
                 Rating = 5,
                 NumberOfPeopleRating = 3
 
             });
+
+            modelBuilder.Entity<ApplicationUser>().HasMany(c => c.Comments).WithOne(u => u.User).IsRequired();
         }
     }
 }

@@ -13,10 +13,10 @@ namespace LegoBuildingInstruction.Controllers
     public class AccountController : Controller
     {
         private readonly ILogger<AccountController> _logger;
-        private readonly SignInManager<LegoUser> _signInManager;
-        private readonly UserManager<LegoUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public AccountController(ILogger<AccountController> logger, SignInManager<LegoUser> signInManager, UserManager<LegoUser> userManager)
+        public AccountController(ILogger<AccountController> logger, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
             _signInManager = signInManager;
@@ -81,7 +81,7 @@ namespace LegoBuildingInstruction.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = new LegoUser
+                var user = new ApplicationUser
                 {
                     Email = model.Email,
                     UserName = model.Email,
