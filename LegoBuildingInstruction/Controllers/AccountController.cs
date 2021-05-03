@@ -42,7 +42,6 @@ namespace LegoBuildingInstruction.Controllers
             if (ModelState.IsValid)
             {
 
-
                 var result = await _signInManager.PasswordSignInAsync(model.Email,
                   model.Password,
                   model.RememberMe,
@@ -113,6 +112,7 @@ namespace LegoBuildingInstruction.Controllers
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
+
 
             await _signInManager.SignOutAsync();
 

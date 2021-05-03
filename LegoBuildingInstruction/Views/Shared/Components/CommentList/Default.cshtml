@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<Comment>
 
 
-<h3>@Model.Count() Comments</h3>
+<h3>
+    <span style="font-weight: bold">Comments (@Model.Count())</span>
+</h3>
 
 
 
@@ -10,10 +12,10 @@
     <div class="media">
         <a class="pull-left" href="#"><img class="rounded-circle" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""></a>
         <div class="media-body">
-            <h4 class="media-heading">@comment.User.UserName</h4>
+            <h4 class="media-heading">@comment.User.FirstName @comment.User.LastName</h4>
             <p>@comment.Message</p>
             <div class="row">
-                <div class="col-md-6"><i class="far fa-calendar-alt fa-fw"></i>27/02/2014  @comment.CreatedAt.ToString("dd/MM/yyyy h:mm tt")</div>
+                <div class="col-md-6"><i class="far fa-calendar-alt fa-fw"></i>@comment.CreatedAt.ToString("dd/MM/yyyy h:mm tt")</div>
                 @*<div class="col-md-6 text-right"><i class="fas fa-thumbs-up fa-fw"></i>3</div>*@
 
             </div>

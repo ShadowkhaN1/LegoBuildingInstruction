@@ -23,12 +23,12 @@ padding-top-20 {
 }
 
 .sidebar {
-    background: rgb(248,248,248);
     background-image: none;
-    height: calc(100vh - 93.44px);
     min-width: 220px;
     padding-top: 25px;
+    padding-bottom: 25px;
 }
+
 
 
 /*Comments*/

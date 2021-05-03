@@ -1,6 +1,11 @@
 ﻿
 @model BuildingInstruction
 
+@{
+    var newComment = new Comment {
+        BuildingInstructionId = Model.Id
+    };
+}
 
 <div class="container-fluid p-5">
 
@@ -50,15 +55,17 @@
         </div>
 
     </div>
-    
+
 </div>
 
 
 <section class="content-item" id="comments">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12">
-                @await Component.InvokeAsync("CommentList", new { buildingInstructionId  = Model.Id})
+            <div class="col-lg-12">
+
+                <partial name="_Comment" model="newComment" />
+                @await Component.InvokeAsync("CommentList", new { buildingInstructionId = Model.Id })
 
             </div>
         </div>

@@ -1,0 +1,19 @@
+﻿
+
+@model Comment
+
+
+
+    <form method="post">
+        <h3 class="pull-left">New Comment</h3>
+
+        <fieldset>
+            <div class="row">
+
+                <div class="form-group col-xs-12 col-sm-12 col-lg-12">
+                    <textarea asp-for="Message" class="form-control" id="message" placeholder="Your message" required=""></textarea>
+                </div>
+            </div>
+        </fieldset>
+        <button type="submit" class="btn btn-secondary pull-right">Submit</button>
+    </form>

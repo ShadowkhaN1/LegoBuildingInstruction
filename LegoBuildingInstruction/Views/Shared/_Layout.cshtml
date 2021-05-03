@@ -25,14 +25,30 @@
     <partial name="_Navbar" />
 
     <!-- Page Content -->
-    <div class="container-fluid p-0">
+    <div class="container-fluid">
 
         <div class="row">
 
             <div class="col-lg-2">
 
+                <div class="row">
 
-                @await Component.InvokeAsync("CategoryMenu")
+                    @await Component.InvokeAsync("CategoryMenu")
+                </div>
+
+                <div class="row text-center">
+                    <a href="https://apps.apple.com/pl/app/buildinstruction/id1543726198?l=pl">
+                        <img src="~/images/MobileLogo/apple-store-logo.png" class="img-fluid p-2" />
+                    </a>
+                </div>
+
+                <div class="row text-center">
+
+                    <a href="https://play.google.com/store/apps/details?id=com.lukaszneumann.legobuildinginstruction&hl=pl">
+                      <img src="~/images/MobileLogo/google-play-logo.png" class="img-fluid p-2" />
+                    </a>
+                </div>
+
 
             </div>
             <!-- /.col-lg-3 -->

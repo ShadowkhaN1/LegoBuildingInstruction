@@ -20,7 +20,7 @@ namespace LegoBuildingInstruction.Components
 
         public IViewComponentResult Invoke(int buildingInstructionId)
         {
-            var comments = _commentRepository.GetCommentsByBuildingInstruction(buildingInstructionId).OrderBy(o => o.CreatedAt);
+            var comments = _commentRepository.GetCommentsByBuildingInstruction(buildingInstructionId).OrderByDescending(o => o.CreatedAt);
 
             return View(comments);
         }

@@ -19,7 +19,7 @@ namespace LegoBuildingInstruction.Models
         public void AddComment(Comment comment)
         {
             _appDbContext.Comments.Add(comment);
-            _appDbContext.SaveChangesAsync();
+            _appDbContext.SaveChanges();
         }
 
         public IEnumerable<Comment> GetCommentsByBuildingInstruction(int buildingInstructionId) 

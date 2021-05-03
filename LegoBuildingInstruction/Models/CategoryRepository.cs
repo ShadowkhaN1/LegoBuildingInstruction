@@ -9,7 +9,7 @@ namespace LegoBuildingInstruction.Models
     public class CategoryRepository : ICategoryRepository
     {
 
-        private AppDbContext _appDbContext;
+        private readonly AppDbContext _appDbContext;
 
         public CategoryRepository(AppDbContext appDbContext)
         {
