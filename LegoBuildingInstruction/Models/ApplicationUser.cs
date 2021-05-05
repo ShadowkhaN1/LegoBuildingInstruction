@@ -15,5 +15,6 @@ namespace LegoBuildingInstruction.Models
 
         public List<Comment> Comments { get; set; }
 
+        public List<BuildingInstruction> BuildingInstructions { get; set; }
     }
 }

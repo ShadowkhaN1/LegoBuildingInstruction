@@ -15,14 +15,14 @@ namespace LegoBuildingInstruction.Models
             _appDbContext = appDbContext;
         }
 
-        public IEnumerable<BuildingInstruction> AllBuildingInstructions => _appDbContext.BuildingInstructions.Include(c => c.Category).Include(d => d.DifficultyLevel);
+        public IEnumerable<BuildingInstruction> AllBuildingInstructions => _appDbContext.BuildingInstructions.Include(c => c.Category).Include(d => d.DifficultyLevel).Include(u => u.User);
 
         public IEnumerable<BuildingInstruction> TopRatedBuildingInstructions => _appDbContext.BuildingInstructions.OrderByDescending(b => b.Rating);
 
         public BuildingInstruction GetBuildingInstructionById(int id)
         {
 
-            return _appDbContext.BuildingInstructions.FirstOrDefault(b => b.Id == id);
+            return _appDbContext.BuildingInstructions.Include(u => u.User).FirstOrDefault(b => b.Id == id);
         }
     }
 }

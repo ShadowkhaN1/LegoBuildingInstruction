@@ -33,6 +33,7 @@ namespace LegoBuildingInstruction.Models
 
 
 
+
             modelBuilder.Entity<DifficultyLevel>().HasData(new DifficultyLevel { Id = 1, Name = "Easy" });
             modelBuilder.Entity<DifficultyLevel>().HasData(new DifficultyLevel { Id = 2, Name = "Normal" });
             modelBuilder.Entity<DifficultyLevel>().HasData(new DifficultyLevel { Id = 3, Name = "Hard" });

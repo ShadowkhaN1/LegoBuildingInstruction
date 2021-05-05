@@ -3,13 +3,14 @@
 
 <div class="container">
     <partial name="_Carousel" />
+    <hr />
 
-    <h2>Top rated building instruction!</h2>
+    <h2 class="mt-2">Last added building instruction!</h2>
 
 
     <div class="row">
 
-        @foreach (var buildingInstruction in Model.TopRatedLegoBuildingInstructions.ToList().Take(5))
+        @foreach (var buildingInstruction in Model.LegoBuildingInstructions.ToList().OrderByDescending(b => b.CreatedAt).Take(6))
         {
             <partial name="_BuildingInstructionCard" model="buildingInstruction" />
         }

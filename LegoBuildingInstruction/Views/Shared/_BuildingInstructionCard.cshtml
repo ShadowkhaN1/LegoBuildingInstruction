@@ -3,17 +3,20 @@
 
 <div class="col-lg-4 col-md-6 mb-4">
 
-    <div class="card h-100">
-        <a href="#"><img class="card-img-top" src="@Url.Content(Model.ImageThumbnailUrl)" alt=""></a>
+    <div class="card h-100 shadow p-3 mb-3" style="border-radius: 25px; border: 5px solid white">
+        <img class="card-img-top" src="@Url.Content(Model.ImageThumbnailUrl)" alt="">
         <div class="card-body">
-            <h5 class="card-title">
-                @Model.Name
-            </h5>
+            <h4 class="card-title text-center">
+                <strong>@Model.Name</strong>
+            </h4>
 
-            @* <h6>Dificculty: @Model.DifficultyLevel.Name</h6>*@
-            <p class="card-text">@Model.ShortDescription</p>
-            <a type="button" class="btn btn-secondary" asp-controller="BuildingInstruction" asp-action="Details" asp-route-id="@Model.Id">View details »</a>
-            @*<p class="h6">Pages: @Model.Pages</p>*@
+            <p class="card-text mb-0 "><strong>Category:</strong> @Model.Category.CategoryName</p>
+            <p class="card-text"><strong>Pages:</strong> @Model.Pages</p>
+
+            <a type="button" class="btn btn-danger  btn-block " asp-controller="BuildingInstruction" asp-action="Details" asp-route-id="@Model.Id">View details »</a>
+
+
+
         </div>
         <div class="card-footer">
 
@@ -24,8 +27,6 @@
 
         </div>
     </div>
-
-
 
 </div>
 

@@ -10,7 +10,7 @@ namespace LegoBuildingInstruction.ViewModels
     public class HomeViewModel
     {
 
-        public IEnumerable<BuildingInstruction> TopRatedLegoBuildingInstructions { get; set; }
+        public IEnumerable<BuildingInstruction> LegoBuildingInstructions { get; set; }
 
 
     }

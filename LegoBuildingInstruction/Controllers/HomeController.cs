@@ -8,12 +8,10 @@ namespace LegoBuildingInstruction.Controllers
     public class HomeController : Controller
     {
         private readonly IBuildingInstructionRepository _buildingInstructionRepository;
-        private readonly IDifficultyRepository _difficultyRepository;
 
-        public HomeController(IBuildingInstructionRepository buildingInstructionRepository, IDifficultyRepository difficultyRepository)
+        public HomeController(IBuildingInstructionRepository buildingInstructionRepository)
         {
             _buildingInstructionRepository = buildingInstructionRepository;
-            _difficultyRepository = difficultyRepository;
         }
 
         public IActionResult Index()
@@ -22,7 +20,7 @@ namespace LegoBuildingInstruction.Controllers
 
             var homeViewModel = new HomeViewModel
             {
-                TopRatedLegoBuildingInstructions = _buildingInstructionRepository.TopRatedBuildingInstructions
+                LegoBuildingInstructions = _buildingInstructionRepository.AllBuildingInstructions
             };
 
             return View(homeViewModel);

@@ -4,14 +4,12 @@
  * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-shop-homepage/blob/master/LICENSE)
  */
 body {
-  padding-top: 56px;
+    padding-top: 56px;
 }
 
 
 padding-left-0 {
-    
     padding-left: 0px;
-
 }
 
 padding-top-20 {
@@ -161,3 +159,7 @@ body {
             font-size: 15px;
             margin-right: 10px;
         }
+
+
+
+

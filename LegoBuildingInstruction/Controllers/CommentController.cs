@@ -1,4 +1,5 @@
 ﻿using LegoBuildingInstruction.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
@@ -25,6 +26,7 @@ namespace LegoBuildingInstruction.Controllers
 
 
         [HttpPost]
+        [Authorize]
         public IActionResult Form(Comment comment)
         {
 

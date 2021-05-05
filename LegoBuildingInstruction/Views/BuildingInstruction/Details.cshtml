@@ -2,7 +2,8 @@
 @model BuildingInstruction
 
 @{
-    var newComment = new Comment {
+    var newComment = new Comment
+    {
         BuildingInstructionId = Model.Id
     };
 }
@@ -42,16 +43,36 @@
                 </div>
 
             </div>
+            <div class="row">
+                <div class="col-sm-4">
+
+                    <div class="dropdown">
+                        <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Rate
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">1</a>
+                            <a class="dropdown-item" href="#">2</a>
+                            <a class="dropdown-item" href="#">3</a>
+                            <a class="dropdown-item" href="#">4</a>
+                            <a class="dropdown-item" href="#">5</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mt-2">
+                    <p class="text-secondary">Your rating: 5</p>
+                </div>
+            </div>
+
+            <p class="text-secondary mt-3">Author: @Model.User.FirstName @Model.User.LastName</p>
+
             <hr />
 
             <p class="text-secondary">@Model.LongDescription</p>
 
 
-
-
-            <button class=" btn btn-secondary btn-block">Get Building Instruction</button>
-            <button class=" btn btn-secondary btn-block">Get Program</button>
-
+            <a type="button" class="btn btn-secondary btn-block" asp-controller="Instruction" asp-action="Instruction" asp-route-id="@Model.Id">Get Building Instruction</a>
+            <a type="button" class="btn btn-secondary btn-block" href="~/programs/colorsegregation-program.ev3" download="qwe">Get Program</a>
         </div>
 
     </div>
@@ -73,28 +94,3 @@
 </section>
 
 
-@*<partial name="_Comment" />*@
-
-
-<!--<div class="thumbnail">-->
-@*<img alt="@Model.Name" src="@Url.Content(@Model.ImageUrl)">*@
-<!--<div class="iframe-container">
-            <iframe width="850" height="415" src="@Model.VideoUrl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-        </div>
-        <div class="caption-full">
-            <h3 class="pull-right"><span class="glyphicon glyphicon-list-alt"></span>Pages: @Model.Pages</h3>
-            <h3>
-                <a href="#">@Model.Name</a>
-            </h3>
-            <h4>@Model.ShortDescription</h4>
-            <p>@Model.LongDescription</p>
-            <div class="addToCart">
-                <p class="button">
-                    <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToShoppingCart"
-                       asp-route-pieId="@Model.Pages">Add to cart</a>
-                </p>
-            </div>
-        </div>
-    </div>
-</div>-->

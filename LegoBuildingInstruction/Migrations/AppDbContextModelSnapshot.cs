@@ -100,6 +100,9 @@ namespace LegoBuildingInstruction.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("DifficultyLevelId")
                         .HasColumnType("int");
 
@@ -136,6 +139,9 @@ namespace LegoBuildingInstruction.Migrations
                     b.Property<string>("ShortDescription")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("VideoUrl")
                         .HasColumnType("nvarchar(max)");
 
@@ -145,6 +151,8 @@ namespace LegoBuildingInstruction.Migrations
 
                     b.HasIndex("DifficultyLevelId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("BuildingInstructions");
 
                     b.HasData(
@@ -152,6 +160,7 @@ namespace LegoBuildingInstruction.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DifficultyLevelId = 2,
                             ImageThumbnailUrl = "~/Images/LifterSmall.png",
                             ImageUrl = "~/Images/Lifter.png",
@@ -168,6 +177,7 @@ namespace LegoBuildingInstruction.Migrations
                         {
                             Id = 2,
                             CategoryId = 1,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DifficultyLevelId = 1,
                             ImageThumbnailUrl = "~/Images/ColorSegregationSmall.png",
                             ImageUrl = "~/Images/ColorSegregation.png",
@@ -178,12 +188,13 @@ namespace LegoBuildingInstruction.Migrations
                             Rating = 5f,
                             Set = "45544",
                             ShortDescription = "Pick up objects!",
-                            VideoUrl = "~/Video/ColorSegregationVideo.mp4"
+                            VideoUrl = "https://www.youtube.com/embed/lRVrWwEMntQ"
                         },
                         new
                         {
                             Id = 3,
                             CategoryId = 2,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DifficultyLevelId = 1,
                             ImageThumbnailUrl = "~/Images/DinosaurImageSmall.png",
                             ImageUrl = "~/Images/DinosaurImageSmall.png",
@@ -200,8 +211,9 @@ namespace LegoBuildingInstruction.Migrations
                         {
                             Id = 4,
                             CategoryId = 2,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DifficultyLevelId = 1,
-                            ImageThumbnailUrl = "~/Images/DinosaurImageSmall.png",
+                            ImageThumbnailUrl = "~/Images/HitTheMole.PNG",
                             ImageUrl = "~/Images/HitTheMole.PNG",
                             LongDescription = "Create a dinosaur from your lego bricks!",
                             Name = "Hit the mole",
@@ -452,9 +464,15 @@ namespace LegoBuildingInstruction.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("LegoBuildingInstruction.Models.ApplicationUser", "User")
+                        .WithMany("BuildingInstructions")
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Category");
 
                     b.Navigation("DifficultyLevel");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("LegoBuildingInstruction.Models.Comment", b =>
@@ -529,6 +547,8 @@ namespace LegoBuildingInstruction.Migrations
 
             modelBuilder.Entity("LegoBuildingInstruction.Models.ApplicationUser", b =>
                 {
+                    b.Navigation("BuildingInstructions");
+
                     b.Navigation("Comments");
                 });
 
