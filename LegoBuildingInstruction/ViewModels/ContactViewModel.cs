@@ -19,6 +19,9 @@ namespace LegoBuildingInstruction.ViewModels
         [Required]
         public string Message { get; set; }
 
+        [Required]
+        public string Subject { get; set; }
+
 
 
     }

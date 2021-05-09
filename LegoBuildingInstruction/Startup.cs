@@ -1,4 +1,5 @@
 using LegoBuildingInstruction.Models;
+using LegoBuildingInstruction.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -39,7 +40,10 @@ namespace LegoBuildingInstruction
             services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddControllersWithViews();
 
+            services.AddScoped<IEmailSender, EmailSender>();
 
+            var emailConfig = Configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
           
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>

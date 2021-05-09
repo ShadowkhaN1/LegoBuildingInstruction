@@ -140,7 +140,6 @@ C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\obj\Deb
 C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\obj\Debug\net5.0\Razor\Views\BuildingInstruction\Details.cshtml.g.cs
 C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\obj\Debug\net5.0\Razor\Views\BuildingInstruction\List.cshtml.g.cs
 C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\obj\Debug\net5.0\Razor\Views\Comment\Form.cshtml.g.cs
-C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\obj\Debug\net5.0\Razor\Views\Contact\Contact.cshtml.g.cs
 C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\obj\Debug\net5.0\Razor\Views\Instruction\Instruction.cshtml.g.cs
 C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\obj\Debug\net5.0\Razor\Views\Shared\Components\CategoryMenu\Default.cshtml.g.cs
@@ -162,3 +161,8 @@ C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\obj\Deb
 C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\obj\Debug\net5.0\ref\LegoBuildingInstruction.dll
 C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\obj\Debug\net5.0\LegoBuildingInstruction.pdb
 C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\obj\Debug\net5.0\LegoBuildingInstruction.genruntimeconfig.cache
+C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\obj\Debug\net5.0\Razor\Views\Contact\Form.cshtml.g.cs
+C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\bin\Debug\net5.0\MailKit.dll
+C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\bin\Debug\net5.0\MimeKit.dll
+C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\bin\Debug\net5.0\NETCore.MailKit.dll
+C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\bin\Debug\net5.0\BouncyCastle.Crypto.dll
