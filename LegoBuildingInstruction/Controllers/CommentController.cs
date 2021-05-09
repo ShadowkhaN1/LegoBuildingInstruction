@@ -27,7 +27,7 @@ namespace LegoBuildingInstruction.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult Form(Comment comment)
+        public IActionResult AddComment(Comment comment)
         {
 
 
@@ -48,6 +48,67 @@ namespace LegoBuildingInstruction.Controllers
 
             return Redirect(url);
         }
+
+
+
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult EditComment(int id)
+        {
+
+            var editComment = _commentRepository.GetCommentById(id);
+
+            if (editComment == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return View(editComment);
+            }
+
+
+        }
+
+
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult EditComment(Comment comment)
+        {
+
+
+            _commentRepository.UpdateComment(comment);
+
+
+            string url = $@"/BuildingInstruction/Details/{comment.BuildingInstructionId}";
+
+
+            return Redirect(url);
+        }
+
+
+        public  IActionResult DeleteComment(int id)
+        {
+
+            var deleteComment = _commentRepository.GetCommentById(id);
+
+
+            if (deleteComment != null)
+            {
+
+
+                _commentRepository.DeleteComment(deleteComment);
+
+                string url = $@"/BuildingInstruction/Details/{deleteComment.BuildingInstructionId}";
+
+                return Redirect(url);
+            }
+
+            return View("Index", "Home");
+        }
+
 
 
     }

@@ -23,18 +23,13 @@ namespace LegoBuildingInstruction.Controllers
         public IActionResult Form()
         {
 
-
-
-
             return View();
         }
-
 
 
         [HttpPost]
         public IActionResult Form(ContactViewModel model)
         {
-
 
             if (ModelState.IsValid)
             {
@@ -51,13 +46,9 @@ namespace LegoBuildingInstruction.Controllers
             }
             else
             {
-
                 ModelState.AddModelError(string.Empty, "Email not sent.");
-
             }
 
-
-            
 
             return View();
         }

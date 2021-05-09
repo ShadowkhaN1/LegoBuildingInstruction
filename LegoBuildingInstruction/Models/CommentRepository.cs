@@ -24,5 +24,36 @@ namespace LegoBuildingInstruction.Models
 
         public IEnumerable<Comment> GetCommentsByBuildingInstruction(int buildingInstructionId) 
             => _appDbContext.Comments.Include(u => u.User).Where(b => b.BuildingInstructionId == buildingInstructionId);
+
+
+        public Comment GetCommentById(int id)
+        {
+           return  _appDbContext.Comments.FirstOrDefault(c => c.CommentId == id);
+        }
+
+        public void UpdateComment(Comment updateComment)
+        {
+
+            var editComment = _appDbContext.Comments.FirstOrDefault(c => c.CommentId == updateComment.CommentId);
+
+
+            if (editComment != null)
+            {
+                editComment.CreatedAt = DateTime.Now;
+                editComment.Message = updateComment.Message;
+
+                _appDbContext.SaveChanges();
+
+            }
+
+
+        }
+
+        public void DeleteComment(Comment deleteComment)
+        {
+
+            _appDbContext.Comments.Remove(deleteComment);
+            _appDbContext.SaveChanges();
+        }
     }
 }

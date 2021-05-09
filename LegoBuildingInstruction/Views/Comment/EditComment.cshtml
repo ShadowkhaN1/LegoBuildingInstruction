@@ -1,0 +1,30 @@
+﻿
+@{
+
+    ViewBag.Title = "Edit Comment";
+}
+
+
+@model Comment
+
+<title>@ViewBag.Title</title>
+
+<form method="post" >
+    <h3 class="pull-left">New Comment</h3>
+
+    <fieldset>
+        <div class="row">
+
+            <div class="form-group col-xs-12 col-sm-12 col-lg-12">
+                <textarea asp-for="Message" class="form-control" id="message" placeholder="&#xf075; Your message" required=""></textarea>
+            </div>
+            <input asp-for="BuildingInstructionId" value="@Model.BuildingInstructionId" type="hidden">
+            <input asp-for="CommentId" value="@Model.CommentId" type="hidden">
+        </div>
+    </fieldset>
+    <div class="float-left">
+        <button type="submit" class="btn btn-secondary">Update</button>
+        <a href='javascript:history.go(-1)' class="btn btn-secondary">Cancel</a>
+
+    </div>
+</form>

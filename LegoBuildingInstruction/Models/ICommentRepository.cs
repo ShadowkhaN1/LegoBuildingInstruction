@@ -10,7 +10,14 @@ namespace LegoBuildingInstruction.Models
 
         void AddComment(Comment comment);
 
+        void UpdateComment(Comment editComment);
+
+         Comment GetCommentById(int id);
+
+        void DeleteComment(Comment deleteComment);
+
         IEnumerable<Comment> GetCommentsByBuildingInstruction(int buildingInstructionID);
+
 
     }
 }
