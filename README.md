@@ -16,7 +16,7 @@ The application allows you to view, upload Lego robot building instructions, dow
 ## Screenshots
 ![Example screenshot](./Screenshot1.PNG)
 ![Example screenshot](./Screenshot2.PNG)
-
+![Example screenshot](./Screenshot3.PNG)
 
 ## Technologies
 - ASP.NET Core MVC 5

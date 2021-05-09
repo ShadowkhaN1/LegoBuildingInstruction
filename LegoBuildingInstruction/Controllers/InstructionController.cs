@@ -32,7 +32,7 @@ namespace LegoBuildingInstruction.Controllers
 
         //[Authorize]
         //[HttpPost]
-        //public IActionResult AddInstruction()
+        //public IActionResult Add()
         //{
 
 
