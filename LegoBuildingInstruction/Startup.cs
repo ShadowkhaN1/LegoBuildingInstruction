@@ -36,7 +36,6 @@ namespace LegoBuildingInstruction
 
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IBuildingInstructionRepository, BuildingInstructionRepository>();
-            services.AddScoped<IDifficultyRepository, DifficultyRepository>();
             services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddControllersWithViews();
 

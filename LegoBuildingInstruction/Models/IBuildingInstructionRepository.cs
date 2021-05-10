@@ -13,6 +13,10 @@ namespace LegoBuildingInstruction.Models
         public IEnumerable<BuildingInstruction> TopRatedBuildingInstructions { get; }
 
         BuildingInstruction GetBuildingInstructionById(int id);
+
+        Task AddNewBuildingInstructionAsync(BuildingInstruction newBuildingInstruction);
+
+        void DeleteInstruction(BuildingInstruction deleteInstruction);
     
     }
 }

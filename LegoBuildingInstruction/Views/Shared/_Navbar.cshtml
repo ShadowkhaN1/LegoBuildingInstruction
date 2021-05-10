@@ -4,71 +4,78 @@
 
 
 
-    <head>
+<head>
 
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-        <title>Lego Building Instructions</title>
+    <title>Lego Building Instructions</title>
 
-        <!-- Bootstrap core CSS -->
-        <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- Custom styles for this template -->
-        <link href="~/css/shop-homepage.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="~/css/shop-homepage.css" rel="stylesheet">
 
-        <link href="~/vendor/fontawesome/css/all.css" rel="stylesheet">
+    <link href="~/vendor/fontawesome/css/all.css" rel="stylesheet">
 
-    </head>
-
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        @*<ul class="navbar-nav ml-auto">
-                <li><img src="~/images/logo/Logo.png" width="50" height="50" /></li>
-                <li><a class="navbar-brand" asp-controller="Home" asp-action="Index">Building Instruction</a></li>
-            </ul>*@
-
-        <a asp-controller="Home" asp-action="Index" class="navbar-brand">
-            <img src="~/images/logo/Logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-            <strong>Building Instruction</strong> 
-        </a>
+</head>
 
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    @*<ul class="navbar-nav ml-auto">
+            <li><img src="~/images/logo/Logo.png" width="50" height="50" /></li>
+            <li><a class="navbar-brand" asp-controller="Home" asp-action="Index">Building Instruction</a></li>
+        </ul>*@
 
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
+    <a asp-controller="Home" asp-action="Index" class="navbar-brand">
+        <img src="~/images/logo/Logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <strong>Building Instruction</strong>
+    </a>
 
-                    <a class="nav-link" asp-controller="Home" asp-action="Index">
-                        <i class="fas fa-home" aria-hidden="true"></i>
-                        Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
 
-                <li class="nav-item">
-                    
-                    <a class="nav-link" asp-controller="Contact" asp-action="Form">
-                        <i class="fas fa-address-book"></i>
-                    Contact</a>
-                </li>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+
+                <a class="nav-link" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-home" aria-hidden="true"></i>
+                    Home
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            @if (SignInManager.IsSignedIn(User))
+            {
 
                 <li class="nav-item">
-                    <a class="nav-link" asp-controller="Instruction" asp-action="Add">
+                    <a class="nav-link" asp-controller="BuildingInstruction" asp-action="AddNewInstruction">
                         <i class="fas fa-plus-square" aria-hidden="true"></i>
                         Add
                     </a>
                 </li>
+            }
 
 
-                <partial name="_LoginPartial" />
+            <li class="nav-item">
 
-            </ul>
-        </div>
-    </nav>
+                <a class="nav-link" asp-controller="Contact" asp-action="Form">
+                    <i class="fas fa-address-book"></i>
+                    Contact
+                </a>
+            </li>
+
+
+
+
+            <partial name="_LoginPartial" />
+
+        </ul>
+    </div>
+</nav>

@@ -16,6 +16,14 @@ namespace LegoBuildingInstruction.Models
             _appDbContext = appDbContext;
         }
 
-        public IEnumerable<Category> AllCategories => _appDbContext.Categories.Include( c => c.BuilidingInstructions);
+        public async Task<IEnumerable<Category>> AllCategoriesAsync()
+        {
+
+
+         return  await _appDbContext.Categories.Include(c => c.BuilidingInstructions).ToListAsync();
+        }
+
+        public  IEnumerable<Category> AllCategories  =>  _appDbContext.Categories.Include(c => c.BuilidingInstructions);
+        
     }
 }

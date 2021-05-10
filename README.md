@@ -28,9 +28,10 @@ The application allows you to view, upload Lego robot building instructions, dow
 
 
 ## ToDo
-- Login
-- Comment system
-- Upload Instructions
+- <strike>Login</strike>
+- <strike>Comment system</strike>
+- <strike>Upload Instructions</strike>
+
 
 ## Contact
 Created by lukasz.neumann90@gmail.com - feel free to contact me!

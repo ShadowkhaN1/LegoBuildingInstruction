@@ -27,7 +27,11 @@ padding-top-20 {
     padding-bottom: 25px;
 }
 
-
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
 
 /*Comments*/
 body {
@@ -159,7 +163,3 @@ body {
             font-size: 15px;
             margin-right: 10px;
         }
-
-
-
-

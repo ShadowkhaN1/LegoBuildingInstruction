@@ -15,9 +15,22 @@ namespace LegoBuildingInstruction.Models
             _appDbContext = appDbContext;
         }
 
-        public IEnumerable<BuildingInstruction> AllBuildingInstructions => _appDbContext.BuildingInstructions.Include(c => c.Category).Include(d => d.DifficultyLevel).Include(u => u.User);
+        public IEnumerable<BuildingInstruction> AllBuildingInstructions => _appDbContext.BuildingInstructions.Include(c => c.Category).Include(u => u.User);
 
         public IEnumerable<BuildingInstruction> TopRatedBuildingInstructions => _appDbContext.BuildingInstructions.OrderByDescending(b => b.Rating);
+
+        public async Task AddNewBuildingInstructionAsync(BuildingInstruction newBuildingInstruction)
+        {
+            await _appDbContext.BuildingInstructions.AddAsync(newBuildingInstruction);
+            await _appDbContext.SaveChangesAsync();
+        }
+
+        public void DeleteInstruction(BuildingInstruction deleteInstruction)
+        {
+
+            _appDbContext.BuildingInstructions.Remove(deleteInstruction);
+            _appDbContext.SaveChanges();
+        }
 
         public BuildingInstruction GetBuildingInstructionById(int id)
         {

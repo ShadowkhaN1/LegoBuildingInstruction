@@ -14,7 +14,6 @@ namespace LegoBuildingInstruction.Models
 
         [Required]
         [StringLength(130)]
-        public string ShortDescription { get; set; }
         public string LongDescription { get; set; }
         public string ImageUrl { get; set; }
         public string PdfInstructionUrl { get; set; }
@@ -23,6 +22,7 @@ namespace LegoBuildingInstruction.Models
         public DateTime CreatedAt { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
+
         public int Pages { get; set; }
         public string Set { get; set; }
         public string ProgramUrl { get; set; }
@@ -30,8 +30,6 @@ namespace LegoBuildingInstruction.Models
 
         public int NumberOfPeopleRating { get; set; }
 
-        public int DifficultyLevelId { get; set; }
-        public DifficultyLevel DifficultyLevel { get; set; }
 
         public List<Comment> Comments { get; set; }
 

@@ -1,14 +1,17 @@
 ﻿
 @model BuildingInstruction
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
 
 @{
     var newComment = new Comment
     {
         BuildingInstructionId = Model.Id
     };
+
 }
 
-<div class="container-fluid p-5">
+<div class="container-fluid p-3">
 
 
 
@@ -27,8 +30,9 @@
 
         <div class="col-lg-5">
 
-            <h4>@Model.Name</h4>
+            <h4 class="text-center">@Model.Name</h4>
 
+            <hr style="margin-bottom: 0px" />
             <div class="row">
                 <div class="col-sm">
                     <p class="text-secondary"> Pages: @Model.Pages </p>
@@ -43,6 +47,8 @@
                 </div>
 
             </div>
+            <hr style="margin-top: 0px" />
+
             <div class="row">
                 <div class="col-sm-4">
 
@@ -62,16 +68,48 @@
                 <div class="col-sm-4 mt-2">
                     <p class="text-secondary">Your rating: 5</p>
                 </div>
+
+
+                <div class="col-sm-4 mt-2">
+                    <a class="text-primary" href=""><i class="fas fa-heart fa-fw"></i>Favorites</a>
+                </div>
+
+
             </div>
 
-            <p class="text-secondary mt-3">Author: @Model.User.FirstName @Model.User.LastName</p>
 
-            <hr />
+            <div class="row justify-content-between">
+                <div class="col-6 mt-3">
+                    <p class="text-secondary">Author: @Model.User.FirstName @Model.User.LastName</p>
+
+                </div>
+
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    @if (UserManager.GetUserId(User) == Model.UserId)
+                    {
+                        <div class="col-3 mt-3">
+                            <a asp-controller="BuildingInstruction" asp-action="DeleteInstruction" asp-route-id="@Model.Id" class="text-secondary" onclick="return confirm('Are you sure you want to delete?')"><i class="fas fa-trash fa-fw"></i>Delete</a>
+                        </div>
+
+                        <div class="col-3 mt-3">
+                            <a asp-controller="BuildingInstruction" asp-action="DeleteInstruction" asp-route-id="@Model.Id" class="text-secondary"><i class="fas fa-edit fa-fw"></i>Edit</a>
+                        </div>
+
+                    }
+
+                }
+
+
+            </div>
+
+
+            <hr style="margin-top: 0px" />
 
             <p class="text-secondary">@Model.LongDescription</p>
 
 
-            <a type="button" class="btn btn-secondary btn-block" asp-controller="Instruction" asp-action="Instruction" asp-route-id="@Model.Id">Get Building Instruction</a>
+            <a type="button" class="btn btn-secondary btn-block" asp-controller="BuildingInstruction" asp-action="InstructionPDF" asp-route-id="@Model.Id">Get Building Instruction</a>
             <a type="button" class="btn btn-secondary btn-block" href="~/programs/colorsegregation-program.ev3" download="qwe">Get Program</a>
         </div>
 

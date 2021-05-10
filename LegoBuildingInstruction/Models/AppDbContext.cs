@@ -17,7 +17,6 @@ namespace LegoBuildingInstruction.Models
 
         public DbSet<BuildingInstruction> BuildingInstructions { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<DifficultyLevel> DifficultyLevels { get; set; }
 
         public DbSet<Comment> Comments { get; set; }
 
@@ -34,12 +33,6 @@ namespace LegoBuildingInstruction.Models
 
 
 
-            modelBuilder.Entity<DifficultyLevel>().HasData(new DifficultyLevel { Id = 1, Name = "Easy" });
-            modelBuilder.Entity<DifficultyLevel>().HasData(new DifficultyLevel { Id = 2, Name = "Normal" });
-            modelBuilder.Entity<DifficultyLevel>().HasData(new DifficultyLevel { Id = 3, Name = "Hard" });
-
-
-
             modelBuilder.Entity<BuildingInstruction>().HasData(new BuildingInstruction
             {
                 Id = 1,
@@ -49,9 +42,7 @@ namespace LegoBuildingInstruction.Models
                 Set = "45544 + 45560",
                 VideoUrl = "~/Video/LifterVideo.mp4",
                 ImageUrl = "~/Images/Lifter.png",
-                ShortDescription = "Pick up objects!",
                 LongDescription = "Robot picking up items. The robot detects the object itself using the color sensor.",
-                DifficultyLevelId = 2,
                 ImageThumbnailUrl = "~/Images/LifterSmall.png",
                 Rating = 4.5f,
                 NumberOfPeopleRating = 2
@@ -68,9 +59,7 @@ namespace LegoBuildingInstruction.Models
                 Set = "45544",
                 VideoUrl = "https://www.youtube.com/embed/lRVrWwEMntQ",
                 ImageUrl = "~/Images/ColorSegregation.png",
-                ShortDescription = "Pick up objects!",
                 LongDescription = "Robot picking up items. The robot detects the object itself using the color sensor.",
-                DifficultyLevelId = 1,
                 ImageThumbnailUrl = "~/Images/ColorSegregationSmall.png",
                 Rating = 5,
                 NumberOfPeopleRating = 3
@@ -87,9 +76,7 @@ namespace LegoBuildingInstruction.Models
                 Set = "45300",
                 VideoUrl = "https://www.youtube.com/embed/aUszco5UdeU",
                 ImageUrl = "~/Images/DinosaurImageSmall.png",
-                ShortDescription = "Create a dinosaur from your lego bricks!",
                 LongDescription = "Create a dinosaur from your lego bricks!",
-                DifficultyLevelId = 1,
                 ImageThumbnailUrl = "~/Images/DinosaurImageSmall.png",
                 Rating = 5,
                 NumberOfPeopleRating = 3
@@ -108,9 +95,7 @@ namespace LegoBuildingInstruction.Models
                 Set = "45300",
                 VideoUrl = "https://www.youtube.com/embed/aUszco5UdeU",
                 ImageUrl = "~/Images/HitTheMole.PNG",
-                ShortDescription = "Hit the right mole at the right moment",
                 LongDescription = "Create a dinosaur from your lego bricks!",
-                DifficultyLevelId = 1,
                 ImageThumbnailUrl = "~/Images/HitTheMole.PNG",
                 Rating = 5,
                 NumberOfPeopleRating = 3

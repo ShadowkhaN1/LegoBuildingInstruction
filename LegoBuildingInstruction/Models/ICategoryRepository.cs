@@ -8,6 +8,8 @@ namespace LegoBuildingInstruction.Models
     public interface ICategoryRepository
     {
 
+        Task<IEnumerable<Category>> AllCategoriesAsync();
+
         IEnumerable<Category> AllCategories { get; }
 
     }
