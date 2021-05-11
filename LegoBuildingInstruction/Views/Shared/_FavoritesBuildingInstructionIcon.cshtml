@@ -1,0 +1,20 @@
+﻿
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject IFavoritesBuildingInstructionRepository _favoritesBuildingInstructionRepository
+
+
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+
+    @if (_favoritesBuildingInstructionRepository.GetFavoritesBuildingInstructionsByUserId(UserManager.GetUserId(User)).FirstOrDefault(x => x.BuildingInstructionId == Model.Id) != null)
+    {
+        <i class="fas fa-heart fa-fw text-primary"></i>
+    }
+    else
+    {
+        <i class="far fa-heart fa-fw text-secondary"></i>
+    }
+}

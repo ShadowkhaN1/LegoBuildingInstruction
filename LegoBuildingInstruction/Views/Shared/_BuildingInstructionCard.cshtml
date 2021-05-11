@@ -1,8 +1,4 @@
 ﻿@model BuildingInstruction
-@inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
-@inject IFavoritesBuildingInstructionRepository _favoritesBuildingInstructionRepository
-
 
 <div class="col-lg-4 col-md-6 mb-4">
 
@@ -21,8 +17,6 @@
 
             <a type="button" class="btn btn-danger  btn-block " asp-controller="BuildingInstruction" asp-action="Details" asp-route-id="@Model.Id">View details »</a>
 
-
-
         </div>
         <div class="card-footer">
 
@@ -32,23 +26,11 @@
                 </div>
                 <div class="col-2">
 
-                    @if (SignInManager.IsSignedIn(User))
-                    {
+                    <partial name="_FavoritesBuildingInstructionIcon" />
 
-                        @if (_favoritesBuildingInstructionRepository.GetFavoritesBuildingInstructionsByUserId(UserManager.GetUserId(User)).FirstOrDefault(x => x.BuildingInstructionId == Model.Id) != null)
-                        {
-                               <i class="fas fa-heart text-primary"></i>
-                        }
-                        else
-                        {
-                                <i class="far fa-heart text-secondary"></i>
-                        }
-                    }
                 </div>
 
             </div>
-
-
         </div>
     </div>
 

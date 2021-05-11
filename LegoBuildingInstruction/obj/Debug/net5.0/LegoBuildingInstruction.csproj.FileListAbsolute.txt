@@ -168,3 +168,4 @@ C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\obj\Deb
 C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\obj\Debug\net5.0\Razor\Views\BuildingInstruction\InstructionPDF.cshtml.g.cs
 C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\obj\Debug\net5.0\Razor\Views\BuildingInstruction\AddNewInstruction.cshtml.g.cs
 C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\obj\Debug\net5.0\Razor\Views\Shared\Components\CommentList\Default.cshtml.g.cs
+C:\Users\Marzena\Desktop\LegoBuildingInstruction\LegoBuildingInstruction\obj\Debug\net5.0\Razor\Views\Shared\_FavoritesBuildingInstructionIcon.cshtml.g.cs
