@@ -35,7 +35,7 @@ namespace LegoBuildingInstruction.Models
         public BuildingInstruction GetBuildingInstructionById(int id)
         {
 
-            return _appDbContext.BuildingInstructions.Include(u => u.User).FirstOrDefault(b => b.Id == id);
+            return _appDbContext.BuildingInstructions.Include(u => u.User).Include(c => c.Category).FirstOrDefault(b => b.Id == id);
         }
     }
 }

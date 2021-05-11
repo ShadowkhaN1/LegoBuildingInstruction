@@ -19,6 +19,7 @@ namespace LegoBuildingInstruction.Models
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<FavoritesBuildingInstruction> FavoritesCategories { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -40,7 +40,7 @@ namespace LegoBuildingInstruction.Controllers
 
                 _emailSender.SendEmail(message);
 
-                ViewBag.UserMessage = "Message was sent.";
+                ViewBag.UserMessage = "Thank you for your message!";
                 ModelState.Clear();
 
             }

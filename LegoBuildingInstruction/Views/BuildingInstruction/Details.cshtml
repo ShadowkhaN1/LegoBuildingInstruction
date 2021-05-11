@@ -2,8 +2,12 @@
 @model BuildingInstruction
 @inject UserManager<ApplicationUser> UserManager
 @inject SignInManager<ApplicationUser> SignInManager
+@inject IFavoritesBuildingInstructionRepository _favoritesBuildingInstructionRepository
 
 @{
+
+
+
     var newComment = new Comment
     {
         BuildingInstructionId = Model.Id
@@ -11,7 +15,7 @@
 
 }
 
-<div class="container-fluid p-3">
+<div class="container-fluid p-2">
 
 
 
@@ -70,9 +74,25 @@
                 </div>
 
 
-                <div class="col-sm-4 mt-2">
-                    <a class="text-primary" href=""><i class="fas fa-heart fa-fw"></i>Favorites</a>
-                </div>
+                @if (SignInManager.IsSignedIn(User))
+                {
+
+                    @if (_favoritesBuildingInstructionRepository.GetFavoritesBuildingInstructionsByUserId(UserManager.GetUserId(User)).FirstOrDefault(x => x.BuildingInstructionId == Model.Id) != null)
+                    {
+                        <div class="col-sm-4 mt-2">
+                            <a asp-controller="FavoritesBuildingInstruction" asp-action="AddFavoritesBuildingInstruction" asp-route-buildingInstructionId="@Model.Id" class="text-primary"><i class="fas fa-heart fa-fw"></i>Favorites</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-sm-4 mt-2">
+                            <a asp-controller="FavoritesBuildingInstruction" asp-action="AddFavoritesBuildingInstruction" asp-route-buildingInstructionId="@Model.Id" class="text-secondary"><i class="far fa-heart fa-fw"></i>Favorites</a>
+                        </div>
+                    }
+                }
+           
+
+
 
 
             </div>
@@ -80,6 +100,7 @@
 
             <div class="row justify-content-between">
                 <div class="col-6 mt-3">
+
                     <p class="text-secondary">Author: @Model.User.FirstName @Model.User.LastName</p>
 
                 </div>
@@ -89,11 +110,12 @@
                     @if (UserManager.GetUserId(User) == Model.UserId)
                     {
                         <div class="col-3 mt-3">
-                            <a asp-controller="BuildingInstruction" asp-action="DeleteInstruction" asp-route-id="@Model.Id" class="text-secondary" onclick="return confirm('Are you sure you want to delete?')"><i class="fas fa-trash fa-fw"></i>Delete</a>
+                            <a asp-controller="BuildingInstruction" asp-action="DeleteInstruction" asp-route-id="@Model.Id" class="text-secondary"><i class="fas fa-edit fa-fw"></i>Edit</a>
                         </div>
 
                         <div class="col-3 mt-3">
-                            <a asp-controller="BuildingInstruction" asp-action="DeleteInstruction" asp-route-id="@Model.Id" class="text-secondary"><i class="fas fa-edit fa-fw"></i>Edit</a>
+
+                            <a asp-controller="BuildingInstruction" asp-action="DeleteInstruction" asp-route-id="@Model.Id" class="text-secondary" onclick="return confirm('Are you sure you want to delete?')"><i class="fas fa-trash fa-fw"></i>Delete</a>
                         </div>
 
                     }
@@ -110,7 +132,12 @@
 
 
             <a type="button" class="btn btn-secondary btn-block" asp-controller="BuildingInstruction" asp-action="InstructionPDF" asp-route-id="@Model.Id">Get Building Instruction</a>
-            <a type="button" class="btn btn-secondary btn-block" href="~/programs/colorsegregation-program.ev3" download="qwe">Get Program</a>
+
+            @if (Model.Category.CategoryName == "Mindstorms")
+            {
+                <a type="button" class="btn btn-secondary btn-block" href="~/programs/colorsegregation-program.ev3" download="qwe">Get Program</a>
+            }
+
         </div>
 
     </div>

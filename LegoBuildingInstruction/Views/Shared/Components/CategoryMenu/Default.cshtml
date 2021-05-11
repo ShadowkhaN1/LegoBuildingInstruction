@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<Category>
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@inject IFavoritesBuildingInstructionRepository _favoritesBuildingInstruction
 
 
 <div class="sidebar">
@@ -8,6 +11,15 @@
         <a class="list-group-item list-group-item-action" asp-controller="Home" asp-action="Index">
             <span class="fas fa-home " aria-hidden="true"></span> Home
         </a>
+
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <a class="list-group-item list-group-item-action" asp-controller="BuildingInstruction" asp-action="List" asp-route-category="Favorites">
+                <i class="fas fa-heart" aria-hidden="true"></i> Favorites
+                <span class="badge badge-primary badge-pill text-right">@_favoritesBuildingInstruction.GetFavoritesBuildingInstructionsByUserId(UserManager.GetUserId(User)).Count()</span>
+            </a>
+        }
+
 
 
         @foreach (var category in Model)
@@ -24,7 +36,7 @@
             <span class="badge badge-primary badge-pill text-right">@Model.Sum(c => c.BuilidingInstructions.Count)</span>
         </a>
 
-    
+
 
 
     </div>

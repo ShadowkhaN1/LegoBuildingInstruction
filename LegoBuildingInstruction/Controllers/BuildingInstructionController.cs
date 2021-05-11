@@ -20,13 +20,17 @@ namespace LegoBuildingInstruction.Controllers
         private readonly ICategoryRepository _categoryRepository;
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IFavoritesBuildingInstructionRepository _favoritesBuildingInstructionRepository;
 
-        public BuildingInstructionController(IBuildingInstructionRepository buildingInstructionRepository, ICategoryRepository categoryRepository, IHostingEnvironment hostingEnvironment, UserManager<ApplicationUser> userManager)
+        public BuildingInstructionController(IBuildingInstructionRepository buildingInstructionRepository, 
+            ICategoryRepository categoryRepository, IHostingEnvironment hostingEnvironment,
+            IFavoritesBuildingInstructionRepository favoritesBuildingInstructionRepository, UserManager<ApplicationUser> userManager)
         {
             _buildingInstructionRepository = buildingInstructionRepository;
             _categoryRepository = categoryRepository;
             _hostingEnvironment = hostingEnvironment;
             _userManager = userManager;
+            _favoritesBuildingInstructionRepository = favoritesBuildingInstructionRepository;
         }
 
 
@@ -55,8 +59,13 @@ namespace LegoBuildingInstruction.Controllers
             if (string.IsNullOrEmpty(category))
             {
                 currentCategory = "All Building Instructions";
-                buildingInstructions = _buildingInstructionRepository.AllBuildingInstructions;
+                buildingInstructions = _buildingInstructionRepository.AllBuildingInstructions.OrderByDescending(x => x.CreatedAt);
 
+            }
+            else if (category == "Favorites")
+            {
+                currentCategory = "Favorites";
+                buildingInstructions = _favoritesBuildingInstructionRepository.GetFavoritesBuildingInstructionsByUserId(_userManager.GetUserId(HttpContext.User)).Select(x => x.BuildingInstruction);
             }
             else
             {
@@ -87,7 +96,7 @@ namespace LegoBuildingInstruction.Controllers
 
             _buildingInstructionRepository.DeleteInstruction(deleteInstruction);
 
-            return View("Index", "Home");
+            return RedirectToAction("Index", "Home");
         }
 
 
@@ -105,12 +114,7 @@ namespace LegoBuildingInstruction.Controllers
         public IActionResult AddNewInstruction()
         {
 
-            var newBuildingInstruction = new AddBuildingInstructionViewModel
-            {
-                Categories = _categoryRepository.AllCategories.ToList()
-            };
-
-            return View(newBuildingInstruction);
+            return View();
         }
 
 
@@ -118,8 +122,8 @@ namespace LegoBuildingInstruction.Controllers
         public async Task<IActionResult> AddNewInstruction(AddBuildingInstructionViewModel instructionModel)
         {
 
-            //if (ModelState.IsValid)
-            //{
+            if (ModelState.IsValid)
+            {
 
                 if (instructionModel.InstructionPdf != null)
                 {
@@ -166,7 +170,7 @@ namespace LegoBuildingInstruction.Controllers
 
                     if (!Path.GetExtension(instructionModel.InstructionVideo.FileName.ToLower()).Equals(".mp4"))
                     {
-                        ModelState.AddModelError(string.Empty, "The video format must be .png or .mp4");
+                        ModelState.AddModelError(string.Empty, "The video format must be .mp4");
                         return View();
                     }
 
@@ -180,6 +184,26 @@ namespace LegoBuildingInstruction.Controllers
                 }
 
 
+                if (instructionModel.Program != null)
+                {
+
+                    if (!Path.GetExtension(instructionModel.Program.FileName.ToLower()).Equals(".ev3"))
+                    {
+                        ModelState.AddModelError(string.Empty, "The program format must be .ev3");
+                        return View();
+                    }
+
+                    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "programs");
+                    var uniqueProgramFileName = Guid.NewGuid().ToString() + " " + instructionModel.Program.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueProgramFileName);
+
+
+                    instructionModel.InstructionVideoURL = @$"/Programs/{uniqueProgramFileName}";
+                    await instructionModel.InstructionVideo.CopyToAsync(new FileStream(filePath, FileMode.Create));
+                }
+
+
+
                 var newBuildingInstruction = new BuildingInstruction()
                 {
                     CategoryId = instructionModel.CategoryId,
@@ -191,6 +215,7 @@ namespace LegoBuildingInstruction.Controllers
                     Name = instructionModel.Name,
                     Set = instructionModel.Set,
                     VideoUrl = instructionModel.InstructionVideoURL,
+                    ProgramUrl = instructionModel.ProgramUrl,
                     LongDescription = instructionModel.LongDescription,
 
                 };
@@ -202,11 +227,11 @@ namespace LegoBuildingInstruction.Controllers
 
                 return RedirectToAction("Details", new { id = getNewBuildingInstruction.Id });
 
-            //}
-            //else
-            //{
-            //    ModelState.AddModelError(string.Empty, "The building instruction cannot be added");
-            //}
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "The building instruction cannot be added");
+            }
 
             return View(instructionModel);
         }

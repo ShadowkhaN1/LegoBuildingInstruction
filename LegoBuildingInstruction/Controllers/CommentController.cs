@@ -13,7 +13,6 @@ namespace LegoBuildingInstruction.Controllers
     public class CommentController : Controller
     {
 
-
         private readonly ICommentRepository _commentRepository;
         private readonly UserManager<ApplicationUser> _userManager;
 
@@ -29,8 +28,6 @@ namespace LegoBuildingInstruction.Controllers
         [Authorize]
         public IActionResult AddComment(Comment comment)
         {
-
-
 
             var newComment = new Comment
             {
@@ -50,8 +47,6 @@ namespace LegoBuildingInstruction.Controllers
         }
 
 
-
-
         [HttpGet]
         [Authorize]
         public IActionResult EditComment(int id)
@@ -67,10 +62,7 @@ namespace LegoBuildingInstruction.Controllers
             {
                 return View(editComment);
             }
-
-
         }
-
 
 
         [HttpPost]
@@ -78,26 +70,20 @@ namespace LegoBuildingInstruction.Controllers
         public IActionResult EditComment(Comment comment)
         {
 
-
             _commentRepository.UpdateComment(comment);
 
-
             string url = $@"/BuildingInstruction/Details/{comment.BuildingInstructionId}";
-
 
             return Redirect(url);
         }
 
 
-        public  IActionResult DeleteComment(int id)
+        public IActionResult DeleteComment(int id)
         {
-
             var deleteComment = _commentRepository.GetCommentById(id);
-
 
             if (deleteComment != null)
             {
-
 
                 _commentRepository.DeleteComment(deleteComment);
 
@@ -108,8 +94,5 @@ namespace LegoBuildingInstruction.Controllers
 
             return View("Index", "Home");
         }
-
-
-
     }
 }
