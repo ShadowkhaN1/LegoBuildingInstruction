@@ -1,4 +1,5 @@
 ﻿using LegoBuildingInstruction.Models;
+using LegoBuildingInstruction.Services;
 using LegoBuildingInstruction.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -18,17 +19,17 @@ namespace LegoBuildingInstruction.Controllers
 
         private readonly IBuildingInstructionRepository _buildingInstructionRepository;
         private readonly ICategoryRepository _categoryRepository;
-        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IWebHostEnvironment _webHostingEnvironment;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IFavoritesBuildingInstructionRepository _favoritesBuildingInstructionRepository;
 
-        public BuildingInstructionController(IBuildingInstructionRepository buildingInstructionRepository, 
-            ICategoryRepository categoryRepository, IHostingEnvironment hostingEnvironment,
+        public BuildingInstructionController(IBuildingInstructionRepository buildingInstructionRepository,
+            ICategoryRepository categoryRepository, IWebHostEnvironment webHostingEnvironment,
             IFavoritesBuildingInstructionRepository favoritesBuildingInstructionRepository, UserManager<ApplicationUser> userManager)
         {
             _buildingInstructionRepository = buildingInstructionRepository;
             _categoryRepository = categoryRepository;
-            _hostingEnvironment = hostingEnvironment;
+            _webHostingEnvironment = webHostingEnvironment;
             _userManager = userManager;
             _favoritesBuildingInstructionRepository = favoritesBuildingInstructionRepository;
         }
@@ -100,6 +101,7 @@ namespace LegoBuildingInstruction.Controllers
         }
 
 
+
         [Authorize]
         public IActionResult InstructionPDF(int id)
         {
@@ -111,7 +113,7 @@ namespace LegoBuildingInstruction.Controllers
 
 
         [Authorize]
-        public IActionResult AddNewInstruction()
+        public IActionResult CreateInstruction()
         {
 
             return View();
@@ -119,7 +121,7 @@ namespace LegoBuildingInstruction.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> AddNewInstruction(AddBuildingInstructionViewModel instructionModel)
+        public async Task<IActionResult> CreateInstruction(BuildingInstructionEditViewModel instructionModel)
         {
 
             if (ModelState.IsValid)
@@ -127,60 +129,98 @@ namespace LegoBuildingInstruction.Controllers
 
                 if (instructionModel.InstructionPdf != null)
                 {
+                    
+                    var maxPdfSizeLimit = 30_000_000;
+                    if (instructionModel.InstructionPdf.Length > maxPdfSizeLimit)
+                    {
+                        ModelState.AddModelError(string.Empty, "File instruction .pdf too large, max 30MB" );
+                        return View();
+                    }
 
-                    if (!Path.GetExtension(instructionModel.InstructionPdf.FileName).Equals(".pdf"))
+                    var extension = ".pdf";
+                    if (!extension.Contains(Path.GetExtension(instructionModel.InstructionPdf.FileName.ToLower())))
                     {
                         ModelState.AddModelError(string.Empty, "The building instruction format must be .pdf");
                         return View();
                     }
 
-                    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "buildinginstructions");
+                    string uploadsFolder = Path.Combine(_webHostingEnvironment.WebRootPath, "buildinginstructions");
                     var uniquePdfFileName = Guid.NewGuid().ToString() + " " + instructionModel.InstructionPdf.FileName;
                     string filePath = Path.Combine(uploadsFolder, uniquePdfFileName);
 
 
 
-                    instructionModel.InstructionPdfUrl = @$"~/buildingInstructions/{uniquePdfFileName}";
-                    await instructionModel.InstructionPdf.CopyToAsync(new FileStream(filePath, FileMode.Create));
+                    instructionModel.InstructionPdfUrl = @$"/buildingInstructions/{uniquePdfFileName}";
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await instructionModel.InstructionPdf.CopyToAsync(stream);
+
+                    }
                 }
 
                 if (instructionModel.InstructionImage != null)
                 {
 
-                    if (!Path.GetExtension(instructionModel.InstructionImage.FileName.ToLower()).Equals(".png") &&
-                        !Path.GetExtension(instructionModel.InstructionImage.FileName.ToLower()).Equals(".jpg"))
+                    var maxImageSizeLimt = 2_000_000;
+                    if (instructionModel.InstructionImage.Length > maxImageSizeLimt)
+                    {
+                        ModelState.AddModelError(string.Empty, "Image is too large, max size 2MB");
+                    }
+
+                    var extensions = new string[] { ".png", ".jpg" };
+
+                    if (!extensions.Contains(Path.GetExtension(instructionModel.InstructionImage.FileName.ToLower())))
                     {
                         ModelState.AddModelError(string.Empty, "The picture format must be .png or .jpg");
                         return View();
                     }
 
-                    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "images/Instructions");
+                    string uploadsFolder = Path.Combine(_webHostingEnvironment.WebRootPath, "images/Instructions");
                     var uniqueImageFileName = Guid.NewGuid().ToString() + " " + instructionModel.InstructionImage.FileName;
                     string filePath = Path.Combine(uploadsFolder, uniqueImageFileName);
 
 
-                    instructionModel.InstructionImageUrl = @$"~/Images/Instructions/{uniqueImageFileName}";
-                    await instructionModel.InstructionImage.CopyToAsync(new FileStream(filePath, FileMode.Create));
-                }
+                    instructionModel.InstructionImageUrl = @$"/Images/Instructions/{uniqueImageFileName}";
 
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await instructionModel.InstructionImage.CopyToAsync(stream);
+
+                    }
+                }
 
 
                 if (instructionModel.InstructionVideo != null)
                 {
 
-                    if (!Path.GetExtension(instructionModel.InstructionVideo.FileName.ToLower()).Equals(".mp4"))
+                    var maxVideoSizeLimit = 20_000_000;
+
+                    if (instructionModel.InstructionVideo.Length > maxVideoSizeLimit)
+                    {
+                        ModelState.AddModelError(string.Empty, "Video too large, max size 20MB");
+                    }
+
+                    var extension = ".mp4";
+                    if (!Path.GetExtension(instructionModel.InstructionVideo.FileName.ToLower()).Equals(extension))
                     {
                         ModelState.AddModelError(string.Empty, "The video format must be .mp4");
                         return View();
                     }
 
-                    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "video");
+                    string uploadsFolder = Path.Combine(_webHostingEnvironment.WebRootPath, "video");
                     var uniqueVideoFileName = Guid.NewGuid().ToString() + " " + instructionModel.InstructionVideo.FileName;
                     string filePath = Path.Combine(uploadsFolder, uniqueVideoFileName);
 
 
                     instructionModel.InstructionVideoURL = @$"/Video/{uniqueVideoFileName}";
-                    await instructionModel.InstructionVideo.CopyToAsync(new FileStream(filePath, FileMode.Create));
+
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await instructionModel.InstructionVideo.CopyToAsync(stream);
+
+                    }
                 }
 
 
@@ -193,22 +233,26 @@ namespace LegoBuildingInstruction.Controllers
                         return View();
                     }
 
-                    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "programs");
+                    string uploadsFolder = Path.Combine(_webHostingEnvironment.WebRootPath, "programs");
                     var uniqueProgramFileName = Guid.NewGuid().ToString() + " " + instructionModel.Program.FileName;
                     string filePath = Path.Combine(uploadsFolder, uniqueProgramFileName);
 
 
                     instructionModel.InstructionVideoURL = @$"/Programs/{uniqueProgramFileName}";
-                    await instructionModel.InstructionVideo.CopyToAsync(new FileStream(filePath, FileMode.Create));
-                }
 
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await instructionModel.InstructionVideo.CopyToAsync(stream);
+                    }
+
+                }
 
 
                 var newBuildingInstruction = new BuildingInstruction()
                 {
                     CategoryId = instructionModel.CategoryId,
                     CreatedAt = DateTime.Now,
-                    ImageThumbnailUrl = instructionModel.InstructionImageUrl,
+                    ImageUrl = instructionModel.InstructionImageUrl,
                     UserId = _userManager.GetUserId(HttpContext.User),
                     PdfInstructionUrl = instructionModel.InstructionPdfUrl,
                     Pages = instructionModel.Pages,
@@ -237,16 +281,215 @@ namespace LegoBuildingInstruction.Controllers
         }
 
 
-        private async Task<string> UploadFile(string folderPath, IFormFile file)
+
+
+
+
+        [Authorize]
+        public IActionResult EditInstruction(int id)
+        {
+            var editInstruction = _buildingInstructionRepository.GetBuildingInstructionById(id);
+
+      
+
+            if (editInstruction == null)
+            {
+                return NotFound();
+            }
+
+
+            var editInstructionViewModel = new BuildingInstructionEditViewModel()
+            {
+                Id = id,
+                CategoryId = editInstruction.CategoryId,
+                InstructionImageUrl = editInstruction.ImageUrl,
+                InstructionPdfUrl = editInstruction.PdfInstructionUrl,
+                Pages = editInstruction.Pages,
+                Name = editInstruction.Name,
+                Set = editInstruction.Set,
+                InstructionVideoURL = editInstruction.VideoUrl,
+                ProgramUrl = editInstruction.ProgramUrl,
+                LongDescription = editInstruction.LongDescription,
+            };
+
+
+
+            return View(editInstructionViewModel);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> EditInstruction(BuildingInstructionEditViewModel editInstructionModel)
         {
 
-            folderPath += Guid.NewGuid().ToString() + "_" + file.FileName;
 
-            string serverFolder = Path.Combine(_hostingEnvironment.WebRootPath, folderPath);
+            if (ModelState.IsValid)
+            {
 
-            await file.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+                if (editInstructionModel.InstructionPdf != null)
+                {
 
-            return "/" + folderPath;
+                    var extension = ".pdf";
+                    if (!extension.Contains(Path.GetExtension(editInstructionModel.InstructionPdf.FileName.ToLower())))
+                    {
+                        ModelState.AddModelError(string.Empty, "The building instruction format must be .pdf");
+                        return View();
+                    }
+
+                    string uploadsFolder = Path.Combine(_webHostingEnvironment.WebRootPath, "buildinginstructions");
+                    var uniquePdfFileName = Guid.NewGuid().ToString() + " " + editInstructionModel.InstructionPdf.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniquePdfFileName);
+
+
+
+                    editInstructionModel.InstructionPdfUrl = @$"/buildingInstructions/{uniquePdfFileName}";
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await editInstructionModel.InstructionPdf.CopyToAsync(stream);
+
+                    }
+                }
+
+                if (editInstructionModel.InstructionImage != null)
+                {
+
+                    var extensions = new string[] { ".png", ".jpg" };
+
+                    if (!extensions.Contains(Path.GetExtension(editInstructionModel.InstructionImage.FileName.ToLower())))
+                    {
+                        ModelState.AddModelError(string.Empty, "The picture format must be .png or .jpg");
+                        return View();
+                    }
+
+                    string uploadsFolder = Path.Combine(_webHostingEnvironment.WebRootPath, "images/Instructions");
+                    var uniqueImageFileName = Guid.NewGuid().ToString() + " " + editInstructionModel.InstructionImage.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueImageFileName);
+
+
+                    editInstructionModel.InstructionImageUrl = @$"/Images/Instructions/{uniqueImageFileName}";
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await editInstructionModel.InstructionImage.CopyToAsync(stream);
+
+                    }
+                }
+
+
+                if (editInstructionModel.InstructionVideo != null)
+                {
+
+                    var extension = ".mp4";
+                    if (!Path.GetExtension(editInstructionModel.InstructionVideo.FileName.ToLower()).Equals(extension))
+                    {
+                        ModelState.AddModelError(string.Empty, "The video format must be .mp4");
+                        return View();
+                    }
+
+                    string uploadsFolder = Path.Combine(_webHostingEnvironment.WebRootPath, "video");
+                    var uniqueVideoFileName = Guid.NewGuid().ToString() + " " + editInstructionModel.InstructionVideo.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueVideoFileName);
+
+
+                    editInstructionModel.InstructionVideoURL = @$"/Video/{uniqueVideoFileName}";
+
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await editInstructionModel.InstructionVideo.CopyToAsync(stream);
+
+                    }
+                }
+
+
+                if (editInstructionModel.Program != null)
+                {
+
+                    if (!Path.GetExtension(editInstructionModel.Program.FileName.ToLower()).Equals(".ev3"))
+                    {
+                        ModelState.AddModelError(string.Empty, "The program format must be .ev3");
+                        return View();
+                    }
+
+                    string uploadsFolder = Path.Combine(_webHostingEnvironment.WebRootPath, "programs");
+                    var uniqueProgramFileName = Guid.NewGuid().ToString() + " " + editInstructionModel.Program.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueProgramFileName);
+
+
+                    editInstructionModel.InstructionVideoURL = @$"/Programs/{uniqueProgramFileName}";
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await editInstructionModel.InstructionVideo.CopyToAsync(stream);
+                    }
+
+                }
+
+
+                var editBuildingInstruction = new BuildingInstruction()
+                {
+                    Id = editInstructionModel.Id,
+                    CategoryId = editInstructionModel.CategoryId,
+                    CreatedAt = DateTime.Now,
+                    ImageUrl = editInstructionModel.InstructionImageUrl,
+                    PdfInstructionUrl = editInstructionModel.InstructionPdfUrl,
+                    Pages = editInstructionModel.Pages,
+                    Name = editInstructionModel.Name,
+                    Set = editInstructionModel.Set,
+                    VideoUrl = editInstructionModel.InstructionVideoURL,
+                    ProgramUrl = editInstructionModel.ProgramUrl,
+                    LongDescription = editInstructionModel.LongDescription,
+
+                };
+
+                var updateInstruction =  await _buildingInstructionRepository.UpdateBuildingInstruction(editBuildingInstruction);
+
+
+
+                return RedirectToAction("Details", new { id = updateInstruction.Id });
+
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "The building instruction cannot be added");
+            }
+
+            return View(editInstructionModel);
+
+        }
+
+
+        private bool ValidFileExtension(IFormFile instructionModel, string extension)
+        {
+
+            if (Path.GetExtension(instructionModel.FileName).Equals(extension))
+            {
+                return true;
+            }
+
+            return false;
+
+        }
+
+
+
+
+        private async Task<IFormFile> UploadFile(string folderName, IFormFile file)
+        {
+
+            string uploadsFolder = Path.Combine(_webHostingEnvironment.WebRootPath, folderName);
+            var uniqueFileName = Guid.NewGuid().ToString() + " " + file.FileName;
+            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+
+
+            //file. = @$"/buildingInstructions/{uniqueFileName}";
+            await file.CopyToAsync(new FileStream(filePath, FileMode.Create));
+
+
+            return file;
+
         }
 
     }

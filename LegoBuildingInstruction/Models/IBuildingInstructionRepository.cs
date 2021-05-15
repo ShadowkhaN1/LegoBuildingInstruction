@@ -14,6 +14,8 @@ namespace LegoBuildingInstruction.Models
 
         BuildingInstruction GetBuildingInstructionById(int id);
 
+        Task<BuildingInstruction> UpdateBuildingInstruction(BuildingInstruction updateBuildingInstruction);
+
         Task AddNewBuildingInstructionAsync(BuildingInstruction newBuildingInstruction);
 
         void DeleteInstruction(BuildingInstruction deleteInstruction);

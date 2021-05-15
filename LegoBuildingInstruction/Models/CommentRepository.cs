@@ -31,7 +31,7 @@ namespace LegoBuildingInstruction.Models
            return  _appDbContext.Comments.FirstOrDefault(c => c.CommentId == id);
         }
 
-        public void UpdateComment(Comment updateComment)
+        public Comment UpdateComment(Comment updateComment)
         {
 
             var editComment = _appDbContext.Comments.FirstOrDefault(c => c.CommentId == updateComment.CommentId);
@@ -44,9 +44,10 @@ namespace LegoBuildingInstruction.Models
 
                 _appDbContext.SaveChanges();
 
+
             }
 
-
+            return editComment;
         }
 
         public void DeleteComment(Comment deleteComment)

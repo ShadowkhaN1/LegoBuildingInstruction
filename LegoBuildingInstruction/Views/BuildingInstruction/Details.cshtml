@@ -66,12 +66,17 @@
                 </div>
 
                 <div class="col-sm-4 mt-2">
-                    <a asp-controller="FavoritesBuildingInstruction" asp-action="AddFavoritesBuildingInstruction" asp-route-buildingInstructionId="@Model.Id" class="text-primary"><partial name="_FavoritesBuildingInstructionIcon" />Favorites</a>
+
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <a asp-controller="FavoritesBuildingInstruction" asp-action="AddFavoritesBuildingInstruction" asp-route-buildingInstructionId="@Model.Id" class="text-primary"><partial name="_FavoritesBuildingInstructionIcon" />Favorites</a>
+
+                    }
                 </div>
             </div>
 
-            <div class="row justify-content-between">
-                <div class="col-6 mt-3">
+            <div class="row">
+                <div class="col-8 mt-3">
 
                     <p class="text-secondary">Author: @Model.User.FirstName @Model.User.LastName</p>
 
@@ -81,11 +86,9 @@
                 {
                     @if (UserManager.GetUserId(User) == Model.UserId)
                     {
-                        <div class="col-3 mt-3">
-                            <a asp-controller="BuildingInstruction" asp-action="DeleteInstruction" asp-route-id="@Model.Id" class="text-secondary"><i class="fas fa-edit fa-fw"></i>Edit</a>
-                        </div>
+                        <div class="col justify-content-end mt-3">
+                            <a asp-controller="BuildingInstruction" asp-action="EditInstruction" asp-route-id="@Model.Id" class="text-secondary"><i class="fas fa-edit fa-fw"></i>Edit</a>
 
-                        <div class="col-3 mt-3">
 
                             <a asp-controller="BuildingInstruction" asp-action="DeleteInstruction" asp-route-id="@Model.Id" class="text-secondary" onclick="return confirm('Are you sure you want to delete?')"><i class="fas fa-trash fa-fw"></i>Delete</a>
                         </div>
