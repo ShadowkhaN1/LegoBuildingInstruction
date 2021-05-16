@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,16 +23,20 @@ namespace LegoBuildingInstruction.Controllers
         private readonly IWebHostEnvironment _webHostingEnvironment;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IFavoritesBuildingInstructionRepository _favoritesBuildingInstructionRepository;
+        private readonly IRateInstructionRepository _rateInstructionRepository;
+
 
         public BuildingInstructionController(IBuildingInstructionRepository buildingInstructionRepository,
             ICategoryRepository categoryRepository, IWebHostEnvironment webHostingEnvironment,
-            IFavoritesBuildingInstructionRepository favoritesBuildingInstructionRepository, UserManager<ApplicationUser> userManager)
+            IFavoritesBuildingInstructionRepository favoritesBuildingInstructionRepository, UserManager<ApplicationUser> userManager,
+            IRateInstructionRepository rateInstructionRepository)
         {
             _buildingInstructionRepository = buildingInstructionRepository;
             _categoryRepository = categoryRepository;
             _webHostingEnvironment = webHostingEnvironment;
             _userManager = userManager;
             _favoritesBuildingInstructionRepository = favoritesBuildingInstructionRepository;
+            _rateInstructionRepository = rateInstructionRepository;
         }
 
 
@@ -40,15 +45,21 @@ namespace LegoBuildingInstruction.Controllers
 
             var buildingInstruction = _buildingInstructionRepository.GetBuildingInstructionById(id);
 
-
-
             if (buildingInstruction == null)
             {
                 return NotFound();
             }
 
+            ViewBag.Values = new List<int> { 5, 4, 3, 2, 1 };
+
+
+
             return View(buildingInstruction);
         }
+
+
+
+
 
 
         public IActionResult List(string category)
@@ -269,7 +280,7 @@ namespace LegoBuildingInstruction.Controllers
                 var getNewBuildingInstruction = _buildingInstructionRepository.AllBuildingInstructions.Last();
 
 
-                return RedirectToAction("Details", new { id = getNewBuildingInstruction.Id });
+                return RedirectToAction("Details", new { id = getNewBuildingInstruction.BuildingInstructionId });
 
             }
             else
@@ -300,7 +311,7 @@ namespace LegoBuildingInstruction.Controllers
 
             var editInstructionViewModel = new BuildingInstructionEditViewModel()
             {
-                Id = id,
+                BuildingInstructionId = id,
                 CategoryId = editInstruction.CategoryId,
                 InstructionImageUrl = editInstruction.ImageUrl,
                 InstructionPdfUrl = editInstruction.PdfInstructionUrl,
@@ -429,7 +440,7 @@ namespace LegoBuildingInstruction.Controllers
 
                 var editBuildingInstruction = new BuildingInstruction()
                 {
-                    Id = editInstructionModel.Id,
+                    BuildingInstructionId = editInstructionModel.BuildingInstructionId,
                     CategoryId = editInstructionModel.CategoryId,
                     CreatedAt = DateTime.Now,
                     ImageUrl = editInstructionModel.InstructionImageUrl,
@@ -447,7 +458,7 @@ namespace LegoBuildingInstruction.Controllers
 
 
 
-                return RedirectToAction("Details", new { id = updateInstruction.Id });
+                return RedirectToAction("Details", new { id = updateInstruction.BuildingInstructionId });
 
             }
             else
@@ -473,6 +484,43 @@ namespace LegoBuildingInstruction.Controllers
         }
 
 
+        public async Task<IActionResult> RateInstruction(int buildingInstructionId, int rateValue)
+        {
+
+            var buildinInstruction = _buildingInstructionRepository.GetBuildingInstructionById(buildingInstructionId);
+
+            if (buildinInstruction == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            if (user == null)
+            {
+                NotFound();
+            }
+
+        
+
+
+            var rateInstruction = new RateInstruction()
+            {
+                BuildingInstructionId = buildinInstruction.BuildingInstructionId,
+                BuildingInstruction = buildinInstruction,
+                UserId = user.Id,
+                User = user,
+                RatingValue = rateValue
+            };
+
+
+
+
+            await _rateInstructionRepository.RateInstruction(rateInstruction);
+
+
+            return RedirectToAction("Details", new { id = buildingInstructionId });
+        }
 
 
         private async Task<IFormFile> UploadFile(string folderName, IFormFile file)

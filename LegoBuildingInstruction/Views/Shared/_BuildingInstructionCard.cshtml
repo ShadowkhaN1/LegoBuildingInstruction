@@ -15,14 +15,14 @@
             <p class="card-text mb-0"><strong>Pages:</strong> @Model.Pages</p>
             <p class="card-text"><strong>Author:</strong> @Model.User.FirstName @Model.User.LastName</p>
 
-            <a type="button" class="btn btn-danger  btn-block " asp-controller="BuildingInstruction" asp-action="Details" asp-route-id="@Model.Id">View details »</a>
+            <a type="button" class="btn btn-danger  btn-block " asp-controller="BuildingInstruction" asp-action="Details" asp-route-id="@Model.BuildingInstructionId">View details »</a>
 
         </div>
         <div class="card-footer">
 
             <div class="row justify-content-between">
                 <div class="col-10">
-                    <partial name="_Rating" model="@Model" />
+                    <partial name="_Rating" model="@Model.RateInstructions" />
                 </div>
                 <div class="col-2">
 

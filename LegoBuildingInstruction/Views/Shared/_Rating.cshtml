@@ -1,19 +1,43 @@
-﻿@model BuildingInstruction
+﻿@model IEnumerable<RateInstruction>
 
 
-@for (int i = 0; i < (int)Model.Rating; i++)
+@{
+
+    if (Model == null)
+    {
+        ViewBag.AverageRating = 0;
+        ViewBag.TotalRatesByUser = 0;
+    }
+    else
+    {
+
+        if (Model.Count() > 0)
+        {
+            ViewBag.AverageRating = (int)(Math.Ceiling((double)(Model.Sum(x => x.RatingValue) / Model.Count())));
+            ViewBag.TotalRatesByUser = Model.Count();
+        }
+        else
+        {
+            ViewBag.AverageRating = 0;
+        }
+    }
+
+}
+
+
+@for (int i = 0; i < ViewBag.AverageRating; i++)
 {
 
     <small class="text-muted">  <i class="fas fa-star"></i></small>
 }
 
-@for (int i = 0; i < 5 - (int)Model.Rating; i++)
+@for (int i = 0; i < 5 - ViewBag.AverageRating; i++)
 {
 
     <small class="text-muted"><i class="far fa-star"></i></small>
 
 }
 
-<small class="text-muted"> @Model.NumberOfPeopleRating </small>
+<small class="text-muted"> @ViewBag.TotalRatesByUser</small>
 
 <small class="text-muted"> <i class="fas fa-user fa-fw"></i></small>

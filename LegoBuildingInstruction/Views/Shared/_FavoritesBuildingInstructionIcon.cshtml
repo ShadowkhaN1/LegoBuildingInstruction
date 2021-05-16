@@ -8,8 +8,7 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-
-    @if (_favoritesBuildingInstructionRepository.GetFavoritesBuildingInstructionsByUserId(UserManager.GetUserId(User)).FirstOrDefault(x => x.BuildingInstructionId == Model.Id) != null)
+    @if (_favoritesBuildingInstructionRepository.GetFavoritesBuildingInstructionsByUserId(UserManager.GetUserId(User)).FirstOrDefault(x => x.BuildingInstructionId == Model.BuildingInstructionId) != null)
     {
         <i class="fas fa-heart fa-fw text-primary"></i>
     }
@@ -18,3 +17,12 @@
         <i class="far fa-heart fa-fw text-secondary"></i>
     }
 }
+
+else
+{
+    <i class="far fa-heart fa-fw text-secondary"></i>
+
+}
+
+
+

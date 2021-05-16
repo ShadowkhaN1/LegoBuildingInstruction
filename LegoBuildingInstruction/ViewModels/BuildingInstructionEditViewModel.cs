@@ -9,7 +9,7 @@ namespace LegoBuildingInstruction.ViewModels
 {
     public class BuildingInstructionEditViewModel : BuildingInstructionCreateViewModel
     {
-        public int Id { get; set; }
+        public int BuildingInstructionId { get; set; }
 
     }
 }

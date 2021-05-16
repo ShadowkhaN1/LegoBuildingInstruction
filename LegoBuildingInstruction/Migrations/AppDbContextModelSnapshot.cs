@@ -40,11 +40,13 @@ namespace LegoBuildingInstruction.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -94,7 +96,7 @@ namespace LegoBuildingInstruction.Migrations
 
             modelBuilder.Entity("LegoBuildingInstruction.Models.BuildingInstruction", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("BuildingInstructionId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -113,14 +115,13 @@ namespace LegoBuildingInstruction.Migrations
 
                     b.Property<string>("LongDescription")
                         .IsRequired()
-                        .HasMaxLength(130)
-                        .HasColumnType("nvarchar(130)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("NumberOfPeopleRating")
-                        .HasColumnType("int");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("Pages")
                         .HasColumnType("int");
@@ -131,10 +132,8 @@ namespace LegoBuildingInstruction.Migrations
                     b.Property<string>("ProgramUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("Rating")
-                        .HasColumnType("real");
-
                     b.Property<string>("Set")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
@@ -143,7 +142,7 @@ namespace LegoBuildingInstruction.Migrations
                     b.Property<string>("VideoUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("BuildingInstructionId");
 
                     b.HasIndex("CategoryId");
 
@@ -154,61 +153,53 @@ namespace LegoBuildingInstruction.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            BuildingInstructionId = 1,
                             CategoryId = 1,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ImageThumbnailUrl = "~/Images/LifterSmall.png",
                             ImageUrl = "~/Images/Lifter.png",
                             LongDescription = "Robot picking up items. The robot detects the object itself using the color sensor.",
                             Name = "Lifter",
-                            NumberOfPeopleRating = 2,
                             Pages = 52,
-                            Rating = 4.5f,
                             Set = "45544 + 45560",
                             VideoUrl = "~/Video/LifterVideo.mp4"
                         },
                         new
                         {
-                            Id = 2,
+                            BuildingInstructionId = 2,
                             CategoryId = 1,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ImageThumbnailUrl = "~/Images/ColorSegregationSmall.png",
                             ImageUrl = "~/Images/ColorSegregation.png",
                             LongDescription = "Robot picking up items. The robot detects the object itself using the color sensor.",
                             Name = "Color Segregation",
-                            NumberOfPeopleRating = 3,
                             Pages = 24,
-                            Rating = 5f,
                             Set = "45544",
                             VideoUrl = "https://www.youtube.com/embed/lRVrWwEMntQ"
                         },
                         new
                         {
-                            Id = 3,
+                            BuildingInstructionId = 3,
                             CategoryId = 2,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ImageThumbnailUrl = "~/Images/DinosaurImageSmall.png",
                             ImageUrl = "~/Images/DinosaurImageSmall.png",
                             LongDescription = "Create a dinosaur from your lego bricks!",
                             Name = "Dinosaur",
-                            NumberOfPeopleRating = 3,
                             Pages = 40,
-                            Rating = 5f,
                             Set = "45300",
                             VideoUrl = "https://www.youtube.com/embed/aUszco5UdeU"
                         },
                         new
                         {
-                            Id = 4,
+                            BuildingInstructionId = 4,
                             CategoryId = 2,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ImageThumbnailUrl = "~/Images/HitTheMole.PNG",
                             ImageUrl = "~/Images/HitTheMole.PNG",
                             LongDescription = "Create a dinosaur from your lego bricks!",
                             Name = "Hit the mole",
-                            NumberOfPeopleRating = 3,
                             Pages = 40,
-                            Rating = 5f,
                             Set = "45300",
                             VideoUrl = "https://www.youtube.com/embed/aUszco5UdeU"
                         });
@@ -296,6 +287,31 @@ namespace LegoBuildingInstruction.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("FavoritesCategories");
+                });
+
+            modelBuilder.Entity("LegoBuildingInstruction.Models.RateInstruction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BuildingInstructionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RatingValue")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BuildingInstructionId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("RateInstructions");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -482,6 +498,23 @@ namespace LegoBuildingInstruction.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("LegoBuildingInstruction.Models.RateInstruction", b =>
+                {
+                    b.HasOne("LegoBuildingInstruction.Models.BuildingInstruction", "BuildingInstruction")
+                        .WithMany("RateInstructions")
+                        .HasForeignKey("BuildingInstructionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LegoBuildingInstruction.Models.ApplicationUser", "User")
+                        .WithMany("RateInstructions")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("BuildingInstruction");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -538,11 +571,15 @@ namespace LegoBuildingInstruction.Migrations
                     b.Navigation("BuildingInstructions");
 
                     b.Navigation("Comments");
+
+                    b.Navigation("RateInstructions");
                 });
 
             modelBuilder.Entity("LegoBuildingInstruction.Models.BuildingInstruction", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("RateInstructions");
                 });
 
             modelBuilder.Entity("LegoBuildingInstruction.Models.Category", b =>

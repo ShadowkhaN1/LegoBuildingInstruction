@@ -1,4 +1,5 @@
 ﻿using LegoBuildingInstruction.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -23,12 +24,14 @@ namespace LegoBuildingInstruction.Controllers
             _buildingInstructionRepository = buildingInstructionRepository;
         }
 
+
+        [Authorize]
         public async Task<IActionResult> AddFavoritesBuildingInstruction(int buildingInstructionId)
         {
 
 
 
-            var buildingInstruction = _buildingInstructionRepository.AllBuildingInstructions.FirstOrDefault(x => x.Id == buildingInstructionId);
+            var buildingInstruction = _buildingInstructionRepository.AllBuildingInstructions.FirstOrDefault(x => x.BuildingInstructionId == buildingInstructionId);
 
             if (buildingInstruction == null)
             {
@@ -62,13 +65,13 @@ namespace LegoBuildingInstruction.Controllers
             await _favoritesBuildingInstructionRepository.AddFavoritesBuildingInstruction(newFavoritesBuildingInstruction);
 
 
-            return RedirectToAction("Details", "BuildingInstruction", new { id = buildingInstruction.Id });
+            return RedirectToAction("Details", "BuildingInstruction", new { id = buildingInstruction.BuildingInstructionId });
         }
 
         public IActionResult DeleteFavoritesBuildingInstruction(int deleteFavoritesBuildingInstructionId)
         {
 
-            var deleteFavorites = _favoritesBuildingInstructionRepository.AllFavoritesBuildingInstructions.SingleOrDefault(x=> x.Id == deleteFavoritesBuildingInstructionId);
+            var deleteFavorites = _favoritesBuildingInstructionRepository.AllFavoritesBuildingInstructions.SingleOrDefault(x => x.Id == deleteFavoritesBuildingInstructionId);
 
 
             if (deleteFavorites == null)
@@ -79,7 +82,7 @@ namespace LegoBuildingInstruction.Controllers
             _favoritesBuildingInstructionRepository.DeleteFavoritesBuildingInstruction(deleteFavorites);
 
 
-            return RedirectToAction("Details", "BuildingInstruction", new { id = deleteFavorites.BuildingInstructionId});
+            return RedirectToAction("Details", "BuildingInstruction", new { id = deleteFavorites.BuildingInstructionId });
         }
 
     }

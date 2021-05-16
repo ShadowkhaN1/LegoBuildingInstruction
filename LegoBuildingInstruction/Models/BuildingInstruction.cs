@@ -9,7 +9,7 @@ namespace LegoBuildingInstruction.Models
     public class BuildingInstruction
     {
 
-        public int Id { get; set; }
+        public int BuildingInstructionId { get; set; }
 
         [StringLength(50, MinimumLength = 5)]
         [Required(ErrorMessage = "Please enter the title of your instruction")]
@@ -42,12 +42,11 @@ namespace LegoBuildingInstruction.Models
         [Display(Name = "Sets of bricks used, example Mindstorms home core - 45544*")]
         public string Set { get; set; }
         public string ProgramUrl { get; set; }
-        public float Rating { get; set; }
-
-        public int NumberOfPeopleRating { get; set; }
 
 
         public List<Comment> Comments { get; set; }
+
+        public List<RateInstruction> RateInstructions { get; set; }
 
         public ApplicationUser User { get; set; }
 

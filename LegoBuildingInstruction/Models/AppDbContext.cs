@@ -20,6 +20,7 @@ namespace LegoBuildingInstruction.Models
 
         public DbSet<Comment> Comments { get; set; }
         public DbSet<FavoritesBuildingInstruction> FavoritesCategories { get; set; }
+        public DbSet<RateInstruction> RateInstructions { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -36,7 +37,7 @@ namespace LegoBuildingInstruction.Models
 
             modelBuilder.Entity<BuildingInstruction>().HasData(new BuildingInstruction
             {
-                Id = 1,
+                BuildingInstructionId = 1,
                 CategoryId = 1,
                 Name = "Lifter",
                 Pages = 52,
@@ -45,15 +46,13 @@ namespace LegoBuildingInstruction.Models
                 ImageUrl = "~/Images/Lifter.png",
                 LongDescription = "Robot picking up items. The robot detects the object itself using the color sensor.",
                 ImageThumbnailUrl = "~/Images/LifterSmall.png",
-                Rating = 4.5f,
-                NumberOfPeopleRating = 2
 
             });
 
 
             modelBuilder.Entity<BuildingInstruction>().HasData(new BuildingInstruction
             {
-                Id = 2,
+                BuildingInstructionId = 2,
                 CategoryId = 1,
                 Name = "Color Segregation",
                 Pages = 24,
@@ -62,15 +61,13 @@ namespace LegoBuildingInstruction.Models
                 ImageUrl = "~/Images/ColorSegregation.png",
                 LongDescription = "Robot picking up items. The robot detects the object itself using the color sensor.",
                 ImageThumbnailUrl = "~/Images/ColorSegregationSmall.png",
-                Rating = 5,
-                NumberOfPeopleRating = 3
 
             });
 
 
             modelBuilder.Entity<BuildingInstruction>().HasData(new BuildingInstruction
             {
-                Id = 3,
+                BuildingInstructionId = 3,
                 CategoryId = 2,
                 Name = "Dinosaur",
                 Pages = 40,
@@ -79,8 +76,6 @@ namespace LegoBuildingInstruction.Models
                 ImageUrl = "~/Images/DinosaurImageSmall.png",
                 LongDescription = "Create a dinosaur from your lego bricks!",
                 ImageThumbnailUrl = "~/Images/DinosaurImageSmall.png",
-                Rating = 5,
-                NumberOfPeopleRating = 3
 
             });
 
@@ -89,7 +84,8 @@ namespace LegoBuildingInstruction.Models
 
             modelBuilder.Entity<BuildingInstruction>().HasData(new BuildingInstruction
             {
-                Id = 4,
+
+                BuildingInstructionId = 4,
                 CategoryId = 2,
                 Name = "Hit the mole",
                 Pages = 40,
@@ -98,12 +94,20 @@ namespace LegoBuildingInstruction.Models
                 ImageUrl = "~/Images/HitTheMole.PNG",
                 LongDescription = "Create a dinosaur from your lego bricks!",
                 ImageThumbnailUrl = "~/Images/HitTheMole.PNG",
-                Rating = 5,
-                NumberOfPeopleRating = 3
 
             });
 
             modelBuilder.Entity<ApplicationUser>().HasMany(c => c.Comments).WithOne(u => u.User).IsRequired();
+
+
+            //modelBuilder.Entity<RateInstruction>().HasKey(r => new { r.BuildingInstructionId, r.UserId });
+
+            modelBuilder.Entity<RateInstruction>().HasOne(b => b.BuildingInstruction).WithMany(r => r.RateInstructions)
+                .HasForeignKey(b => b.BuildingInstructionId);
+
+
+            modelBuilder.Entity<RateInstruction>().HasOne(u => u.User).WithMany(r => r.RateInstructions)
+                .HasForeignKey(u => u.UserId);
         }
     }
 }

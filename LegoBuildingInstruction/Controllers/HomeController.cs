@@ -18,10 +18,13 @@ namespace LegoBuildingInstruction.Controllers
         {
 
 
+
+
             var homeViewModel = new HomeViewModel
             {
                 LegoBuildingInstructions = _buildingInstructionRepository.AllBuildingInstructions
             };
+
 
             return View(homeViewModel);
         }

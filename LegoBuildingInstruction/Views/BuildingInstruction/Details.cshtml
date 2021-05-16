@@ -6,7 +6,7 @@
 @{
     var newComment = new Comment
     {
-        BuildingInstructionId = Model.Id
+        BuildingInstructionId = Model.BuildingInstructionId
     };
 }
 
@@ -38,40 +38,30 @@
                 </div>
 
 
-                <div class="col-sm">
-                    <partial name="_Rating" model="@Model" />
+                <div class="col-sm-5">
+                    <partial name="_Rating" model="@Model.RateInstructions" />
                 </div>
 
             </div>
             <hr style="margin-top: 0px" />
 
             <div class="row">
+
                 <div class="col-sm-4">
-
-                    <div class="dropdown">
-                        <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Rate
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">1</a>
-                            <a class="dropdown-item" href="#">2</a>
-                            <a class="dropdown-item" href="#">3</a>
-                            <a class="dropdown-item" href="#">4</a>
-                            <a class="dropdown-item" href="#">5</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 mt-2">
-                    <p class="text-secondary">Your rating: 5</p>
-                </div>
-
-                <div class="col-sm-4 mt-2">
-
-                    @if (SignInManager.IsSignedIn(User))
+                    @using (Html.BeginForm("RateInstruction", "BuildingInstruction"))
                     {
-                        <a asp-controller="FavoritesBuildingInstruction" asp-action="AddFavoritesBuildingInstruction" asp-route-buildingInstructionId="@Model.Id" class="text-primary"><partial name="_FavoritesBuildingInstructionIcon" />Favorites</a>
-
+                        @Html.Hidden("buildingInstructionId", Model.BuildingInstructionId)
+                        @Html.DropDownList("rateValue", new SelectList(ViewBag.Values), "Rate:", htmlAttributes: new { @class = "btn btn-warning dropdown-toggle text-white", onchange = "this.form.submit();" });
                     }
+                </div>
+
+
+                <div class="col-sm-4 mt-2">
+                    <p class="text-secondary">Your rating: @(Model.RateInstructions.FirstOrDefault(x => x.BuildingInstructionId == Model.BuildingInstructionId && x.UserId == UserManager.GetUserId(User))?.RatingValue )</p>
+                </div>
+
+                <div class="col-sm-4 mt-2">
+                    <a asp-controller="FavoritesBuildingInstruction" asp-action="AddFavoritesBuildingInstruction" asp-route-buildingInstructionId="@Model.BuildingInstructionId" class="text-primary"><partial name="_FavoritesBuildingInstructionIcon" />Favorites</a>
                 </div>
             </div>
 
@@ -87,12 +77,11 @@
                     @if (UserManager.GetUserId(User) == Model.UserId)
                     {
                         <div class="col justify-content-end mt-3">
-                            <a asp-controller="BuildingInstruction" asp-action="EditInstruction" asp-route-id="@Model.Id" class="text-secondary"><i class="fas fa-edit fa-fw"></i>Edit</a>
+                            <a asp-controller="BuildingInstruction" asp-action="EditInstruction" asp-route-id="@Model.BuildingInstructionId" class="text-secondary"><i class="fas fa-edit fa-fw"></i>Edit</a>
 
 
-                            <a asp-controller="BuildingInstruction" asp-action="DeleteInstruction" asp-route-id="@Model.Id" class="text-secondary" onclick="return confirm('Are you sure you want to delete?')"><i class="fas fa-trash fa-fw"></i>Delete</a>
+                            <a asp-controller="BuildingInstruction" asp-action="DeleteInstruction" asp-route-id="@Model.BuildingInstructionId" class="text-secondary" onclick="return confirm('Are you sure you want to delete?')"><i class="fas fa-trash fa-fw"></i>Delete</a>
                         </div>
-
                     }
                 }
 
@@ -104,7 +93,7 @@
             <p class="text-secondary">@Model.LongDescription</p>
 
 
-            <a type="button" class="btn btn-secondary btn-block" asp-controller="BuildingInstruction" asp-action="InstructionPDF" asp-route-id="@Model.Id">Get Building Instruction</a>
+            <a type="button" class="btn btn-secondary btn-block" asp-controller="BuildingInstruction" asp-action="InstructionPDF" asp-route-id="@Model.BuildingInstructionId">Get Building Instruction</a>
 
             @if (Model.Category.CategoryName == "Mindstorms")
             {
@@ -124,7 +113,7 @@
             <div class="col-lg-12">
 
                 <partial name="_Comment" model="newComment" />
-                @await Component.InvokeAsync("CommentList", new { buildingInstructionId = Model.Id })
+                @await Component.InvokeAsync("CommentList", new { buildingInstructionId = Model.BuildingInstructionId })
 
             </div>
         </div>

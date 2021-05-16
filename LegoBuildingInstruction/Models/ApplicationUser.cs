@@ -11,14 +11,17 @@ namespace LegoBuildingInstruction.Models
     {
 
         [Required]
+        [MinLength(3), MaxLength(20)]
         public string FirstName { get; set; }
         [Required]
+        [MinLength(3), MaxLength(20)]
         public string LastName { get; set; }
 
         public List<Comment> Comments { get; set; }
 
         public List<BuildingInstruction> BuildingInstructions { get; set; }
 
+        public List<RateInstruction> RateInstructions { get; set; }
 
 
     }

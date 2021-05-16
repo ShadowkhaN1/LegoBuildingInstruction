@@ -38,6 +38,7 @@ namespace LegoBuildingInstruction
             services.AddScoped<IBuildingInstructionRepository, BuildingInstructionRepository>();
             services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddScoped<IFavoritesBuildingInstructionRepository, FavoritesBuildingInstructionRepository>();
+            services.AddScoped<IRateInstructionRepository, RateInstructionRepository>();
             services.AddControllersWithViews();
 
             services.AddScoped<IEmailSender, EmailSender>();
@@ -52,7 +53,7 @@ namespace LegoBuildingInstruction
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
-
+                
                 options.User.RequireUniqueEmail = true;
 
 

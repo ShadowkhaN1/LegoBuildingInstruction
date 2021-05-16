@@ -15,9 +15,8 @@ namespace LegoBuildingInstruction.Models
             _appDbContext = appDbContext;
         }
 
-        public IEnumerable<BuildingInstruction> AllBuildingInstructions => _appDbContext.BuildingInstructions.Include(c => c.Category).Include(u => u.User);
+        public IEnumerable<BuildingInstruction> AllBuildingInstructions => _appDbContext.BuildingInstructions.Include(c => c.Category).Include(u => u.User).Include(r => r.RateInstructions);
 
-        public IEnumerable<BuildingInstruction> TopRatedBuildingInstructions => _appDbContext.BuildingInstructions.OrderByDescending(b => b.Rating);
 
         public async Task AddNewBuildingInstructionAsync(BuildingInstruction newBuildingInstruction)
         {
@@ -35,13 +34,13 @@ namespace LegoBuildingInstruction.Models
         public BuildingInstruction GetBuildingInstructionById(int id)
         {
 
-            return _appDbContext.BuildingInstructions.Include(u => u.User).Include(c => c.Category).FirstOrDefault(b => b.Id == id);
+            return _appDbContext.BuildingInstructions.Include(u => u.User).Include(c => c.Category).Include(r => r.RateInstructions).FirstOrDefault(b => b.BuildingInstructionId == id);
         }
 
         public async Task<BuildingInstruction> UpdateBuildingInstruction(BuildingInstruction updateBuildingInstruction)
         {
 
-            var updateInstruction = _appDbContext.BuildingInstructions.FirstOrDefault(x => x.Id == updateBuildingInstruction.Id);
+            var updateInstruction = _appDbContext.BuildingInstructions.FirstOrDefault(x => x.BuildingInstructionId == updateBuildingInstruction.BuildingInstructionId);
 
 
             if (updateInstruction != null)

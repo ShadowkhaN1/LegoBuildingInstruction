@@ -10,7 +10,6 @@ namespace LegoBuildingInstruction.Models
 
         public IEnumerable<BuildingInstruction> AllBuildingInstructions { get; }
 
-        public IEnumerable<BuildingInstruction> TopRatedBuildingInstructions { get; }
 
         BuildingInstruction GetBuildingInstructionById(int id);
 
