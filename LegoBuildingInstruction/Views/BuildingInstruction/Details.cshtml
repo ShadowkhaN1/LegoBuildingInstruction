@@ -4,6 +4,9 @@
 @inject SignInManager<ApplicationUser> SignInManager
 
 @{
+
+    ViewBag.Values = new List<int> { 5, 4, 3, 2, 1 };
+
     var newComment = new Comment
     {
         BuildingInstructionId = Model.BuildingInstructionId
@@ -97,7 +100,15 @@
 
             @if (Model.Category.CategoryName == "Mindstorms")
             {
-                <a type="button" class="btn btn-secondary btn-block" href="~/programs/colorsegregation-program.ev3" download="qwe">Get Program</a>
+
+                <a asp-action="DownloadProgram" asp-controller="BuildingInstruction" asp-route-buildingInstructionId="@Model.BuildingInstructionId" type="button" class="btn btn-secondary btn-block">Get Program</a>
+            }
+
+            @if (!ViewData.ModelState.IsValid && ViewData.ModelState["Error"].Errors.Count > 0)
+            {
+                <div class="alert alert-warning">
+                    <strong>Error!</strong> @ViewData.ModelState["Error"].Errors.First().ErrorMessage
+                </div>
             }
 
         </div>

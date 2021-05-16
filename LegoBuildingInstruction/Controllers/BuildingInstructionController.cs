@@ -50,10 +50,6 @@ namespace LegoBuildingInstruction.Controllers
                 return NotFound();
             }
 
-            ViewBag.Values = new List<int> { 5, 4, 3, 2, 1 };
-
-
-
             return View(buildingInstruction);
         }
 
@@ -140,11 +136,11 @@ namespace LegoBuildingInstruction.Controllers
 
                 if (instructionModel.InstructionPdf != null)
                 {
-                    
+
                     var maxPdfSizeLimit = 30_000_000;
                     if (instructionModel.InstructionPdf.Length > maxPdfSizeLimit)
                     {
-                        ModelState.AddModelError(string.Empty, "File instruction .pdf too large, max 30MB" );
+                        ModelState.AddModelError(string.Empty, "File instruction .pdf too large, max 30MB");
                         return View();
                     }
 
@@ -249,11 +245,11 @@ namespace LegoBuildingInstruction.Controllers
                     string filePath = Path.Combine(uploadsFolder, uniqueProgramFileName);
 
 
-                    instructionModel.InstructionVideoURL = @$"/Programs/{uniqueProgramFileName}";
+                    instructionModel.ProgramUrl = @$"/Programs/{uniqueProgramFileName}";
 
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
-                        await instructionModel.InstructionVideo.CopyToAsync(stream);
+                        await instructionModel.Program.CopyToAsync(stream);
                     }
 
                 }
@@ -301,7 +297,7 @@ namespace LegoBuildingInstruction.Controllers
         {
             var editInstruction = _buildingInstructionRepository.GetBuildingInstructionById(id);
 
-      
+
 
             if (editInstruction == null)
             {
@@ -428,11 +424,11 @@ namespace LegoBuildingInstruction.Controllers
                     string filePath = Path.Combine(uploadsFolder, uniqueProgramFileName);
 
 
-                    editInstructionModel.InstructionVideoURL = @$"/Programs/{uniqueProgramFileName}";
+                    editInstructionModel.ProgramUrl = @$"/Programs/{uniqueProgramFileName}";
 
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
-                        await editInstructionModel.InstructionVideo.CopyToAsync(stream);
+                        await editInstructionModel.Program.CopyToAsync(stream);
                     }
 
                 }
@@ -454,7 +450,7 @@ namespace LegoBuildingInstruction.Controllers
 
                 };
 
-                var updateInstruction =  await _buildingInstructionRepository.UpdateBuildingInstruction(editBuildingInstruction);
+                var updateInstruction = await _buildingInstructionRepository.UpdateBuildingInstruction(editBuildingInstruction);
 
 
 
@@ -501,7 +497,7 @@ namespace LegoBuildingInstruction.Controllers
                 NotFound();
             }
 
-        
+
 
 
             var rateInstruction = new RateInstruction()
@@ -522,6 +518,28 @@ namespace LegoBuildingInstruction.Controllers
             return RedirectToAction("Details", new { id = buildingInstructionId });
         }
 
+
+        public IActionResult DownloadProgram(int buildingInstructionId)
+        {
+
+            var instruction = _buildingInstructionRepository.GetBuildingInstructionById(buildingInstructionId);
+
+            if (instruction == null)
+            {
+                return RedirectToAction("Details", new { id = buildingInstructionId });    
+            }
+
+            if (string.IsNullOrEmpty(instruction.ProgramUrl))
+            {
+                ModelState.AddModelError("Error", "Unfortunately, there is no program.");
+                return View("Details", instruction);
+
+            }
+
+
+
+            return File(instruction.ProgramUrl, "application/octet-stream", instruction.Name + Path.GetExtension(instruction.ProgramUrl));
+        }
 
         private async Task<IFormFile> UploadFile(string folderName, IFormFile file)
         {

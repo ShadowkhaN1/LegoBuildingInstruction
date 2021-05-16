@@ -16,6 +16,7 @@ namespace LegoBuildingInstruction.Models
         }
 
         public IEnumerable<FavoritesBuildingInstruction> AllFavoritesBuildingInstructions => _appDbContext.FavoritesCategories.Include(x => x.BuildingInstruction)
+            .Include(x => x.BuildingInstruction.RateInstructions)
             .Include(x => x.BuildingInstruction.Category).Include(x => x.BuildingInstruction.User).Include(x => x.User);
 
         public async Task AddFavoritesBuildingInstruction(FavoritesBuildingInstruction newFavoritesBuildingInstruction)
@@ -36,7 +37,8 @@ namespace LegoBuildingInstruction.Models
         public IEnumerable<FavoritesBuildingInstruction> GetFavoritesBuildingInstructionsByUserId(string id)
         {
 
-            return _appDbContext.FavoritesCategories.Include(x => x.BuildingInstruction).Include(x => x.BuildingInstruction.Category)
+            return _appDbContext.FavoritesCategories.Include(x => x.BuildingInstruction)
+                .Include(x => x.BuildingInstruction.RateInstructions).Include(x => x.BuildingInstruction.Category)
                 .Include(x => x.BuildingInstruction.User).Include(x => x.User).Where(x => x.UserId == id);
 
         }

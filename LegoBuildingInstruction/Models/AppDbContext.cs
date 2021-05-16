@@ -100,7 +100,7 @@ namespace LegoBuildingInstruction.Models
             modelBuilder.Entity<ApplicationUser>().HasMany(c => c.Comments).WithOne(u => u.User).IsRequired();
 
 
-            //modelBuilder.Entity<RateInstruction>().HasKey(r => new { r.BuildingInstructionId, r.UserId });
+
 
             modelBuilder.Entity<RateInstruction>().HasOne(b => b.BuildingInstruction).WithMany(r => r.RateInstructions)
                 .HasForeignKey(b => b.BuildingInstructionId);
