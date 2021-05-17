@@ -11,7 +11,7 @@
 @foreach (var comment in Model)
 {
     <div class="media">
-        <a class="pull-left" href="#"><img class="rounded-circle" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""></a>
+        <a class="pull-left" href="#"><img class="rounded-circle" src="@comment.User.ProfileImageUrl" alt=""></a>
         <div class="media-body">
             <h4 class="media-heading">@comment.User.FirstName @comment.User.LastName</h4>
 

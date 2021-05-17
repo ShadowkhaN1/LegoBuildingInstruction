@@ -54,10 +54,6 @@ namespace LegoBuildingInstruction.Controllers
         }
 
 
-
-
-
-
         public IActionResult List(string category)
         {
 
@@ -81,7 +77,6 @@ namespace LegoBuildingInstruction.Controllers
                 currentCategory = _categoryRepository.AllCategories.FirstOrDefault(c => c.CategoryName == category)?.CategoryName;
 
                 buildingInstructions = _buildingInstructionRepository.AllBuildingInstructions.Where(b => b.Category.CategoryName == category).OrderByDescending(b => b.CreatedAt);
-
 
             }
 
@@ -498,8 +493,6 @@ namespace LegoBuildingInstruction.Controllers
             }
 
 
-
-
             var rateInstruction = new RateInstruction()
             {
                 BuildingInstructionId = buildinInstruction.BuildingInstructionId,
@@ -508,9 +501,6 @@ namespace LegoBuildingInstruction.Controllers
                 User = user,
                 RatingValue = rateValue
             };
-
-
-
 
             await _rateInstructionRepository.RateInstruction(rateInstruction);
 
@@ -535,8 +525,6 @@ namespace LegoBuildingInstruction.Controllers
                 return View("Details", instruction);
 
             }
-
-
 
             return File(instruction.ProgramUrl, "application/octet-stream", instruction.Name + Path.GetExtension(instruction.ProgramUrl));
         }

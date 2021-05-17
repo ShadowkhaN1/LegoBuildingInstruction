@@ -42,7 +42,7 @@
             <h2 class="text-center">Register</h2>
 
 
-            <form method="post">
+            <form method="post" enctype="multipart/form-data" asp-action="Register" asp-controller="Account">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="form-group">
@@ -70,6 +70,12 @@
                     <label asp-for="ConfirmPassword" class="font-weight-bold"></label>
                     <input asp-for="ConfirmPassword" type="password" class="form-control" />
                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ProfileImage" class="control-label font-weight-bold"></label>
+                    <input asp-for="ProfileImage" class="form-control" type="file" id="formFile">
+                    <span asp-validation-for="ProfileImage" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">

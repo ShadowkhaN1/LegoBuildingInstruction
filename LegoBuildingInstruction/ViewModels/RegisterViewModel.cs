@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -39,6 +40,12 @@ namespace LegoBuildingInstruction.ViewModels
         [Display(Name ="Confirm password")]
         [Compare("Password", ErrorMessage = "Password and confirmation password do not match")]
         public string ConfirmPassword { get; set; }
+
+
+        public string ProfileImageUrl { get; set; }
+
+        [Display(Name = "Profile Picture")]
+        public IFormFile ProfileImage { get; set; }
 
     }
 }

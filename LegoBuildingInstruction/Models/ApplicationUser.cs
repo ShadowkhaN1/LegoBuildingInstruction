@@ -22,6 +22,7 @@ namespace LegoBuildingInstruction.Models
         public List<BuildingInstruction> BuildingInstructions { get; set; }
 
         public List<RateInstruction> RateInstructions { get; set; }
+        public string ProfileImageUrl { get; set; }
 
 
     }
