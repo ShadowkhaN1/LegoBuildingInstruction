@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAayLXZzWwXUi/3wvw0ByoZQAAAAACAAAAAAAQZgAAAAEAACAAAAAqyvyTzAURAVRN+P9lDPd403yAzadtj9wn/1xMoKBUtwAAAAAOgAAAAAIAACAAAABRbHIAs27iVxdpJFdvyR457LdcxZeJ0cchSiVOqc1m1oAAAABihgmvW/kMkOCeBe3GQiEhMrKIZ/pSDYEwWp87x4pdJdhZdUQ4rCIjFYZOcYLJnvHwhHEgpqGmDqQ1r+t4bbJ8wFxghN6qZLMbFEa69Dwhcex/C3RS06KQHYMCpB0tUr4AOGi3eu+KBZAOTuxfOjjh/dzNbQ/mfqXP408xQEeffEAAAAAbVI7BW5qoWTl8XZFJwUhCVdZPRjOlTnhBknlkp0EDiA2ykQ9VAOXuqtuVywjx90BI9WeeES2woMZIC93HZi8i</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <EFMigrations Include="LegoBuildingInstruction.Models.AppDbContext">
+      <Value>Data Source=tcp:legobuildinginstructiondbserver.database.windows.net,1433%3bInitial Catalog=LegoBuildingInstruction_db%3bUser Id=neumann.lukasz%40outlook.com%40legobuildinginstructiondbserver%3bPassword=NojmanLeonidas12!</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

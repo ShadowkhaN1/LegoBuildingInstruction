@@ -18,14 +18,16 @@ namespace LegoBuildingInstruction.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public AccountController(ILogger<AccountController> logger, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager,
-            IWebHostEnvironment webHostEnvironment)
+            IWebHostEnvironment webHostEnvironment, RoleManager<IdentityRole> roleManager)
         {
             _logger = logger;
             _signInManager = signInManager;
             _userManager = userManager;
             _webHostEnvironment = webHostEnvironment;
+            _roleManager = roleManager;
         }
 
 
@@ -35,6 +37,7 @@ namespace LegoBuildingInstruction.Controllers
             if (this.User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index");
+                
             }
 
             return View();
@@ -162,6 +165,7 @@ namespace LegoBuildingInstruction.Controllers
         {
 
 
+        
             await _signInManager.SignOutAsync();
 
             return RedirectToAction("index", "home");

@@ -32,6 +32,8 @@ The application allows you to view, upload Lego robot building instructions, dow
 - <strike>Comment system</strike>
 - <strike>Upload Instructions</strike>
 - Admin panel
+- Rest API
+- Testing
 - Deploy to Azure
 
 

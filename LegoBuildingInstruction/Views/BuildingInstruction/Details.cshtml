@@ -77,7 +77,7 @@
 
                 @if (SignInManager.IsSignedIn(User))
                 {
-                    @if (UserManager.GetUserId(User) == Model.UserId)
+                    @if (UserManager.GetUserId(User) == Model.UserId || User.IsInRole("Admin"))
                     {
                         <div class="col justify-content-end mt-3">
                             <a asp-controller="BuildingInstruction" asp-action="EditInstruction" asp-route-id="@Model.BuildingInstructionId" class="text-secondary"><i class="fas fa-edit fa-fw"></i>Edit</a>

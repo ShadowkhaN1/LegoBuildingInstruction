@@ -13,7 +13,37 @@
     <div class="media">
         <a class="pull-left" href="#"><img class="rounded-circle" src="@comment.User.ProfileImageUrl" alt=""></a>
         <div class="media-body">
-            <h4 class="media-heading">@comment.User.FirstName @comment.User.LastName</h4>
+            <div class="container">
+
+                <div class="row">
+
+                    <p class="font-weight-bold mr-1">
+
+
+                        @comment.User.FirstName @comment.User.LastName
+                    </p>
+
+
+
+                    @if (comment.BuildingInstruction.UserId == comment.UserId)
+                    {
+
+                        <p class="alert alert-primary small mr-1 p-1 " style="width: auto" role="alert">
+                            Author
+
+                        </p>
+                    }
+                    @if (await UserManager.IsInRoleAsync(comment.User, "Admin"))
+                    {
+                        @*<i class="fas fa-user-shield"></i>*@
+                        <p class="alert alert-primary p-1 small" style="width: auto" role="alert">Administrator</p>
+                    }
+
+
+                </div>
+            </div>
+
+
 
             <p>@comment.Message</p>
             <div class="row">
@@ -23,10 +53,12 @@
 
 
 
+
+
                 @if (SignInManager.IsSignedIn(User))
                 {
 
-                    @if (comment.UserId == UserManager.GetUserId(User))
+                    @if (comment.UserId == UserManager.GetUserId(User) || User.IsInRole("Admin"))
                     {
 
                         <div class="col-xs-3 ">
@@ -41,9 +73,9 @@
 
 
             @*<ul class="list-unstyled list-inline media-detail pull-right">
-            <li class=""><a href="">Like</a></li>
-            <li class=""><a href="">Reply</a></li>
-        </ul>*@
+                    <li class=""><a href="">Like</a></li>
+                    <li class=""><a href="">Reply</a></li>
+                </ul>*@
         </div>
     </div>
 }
