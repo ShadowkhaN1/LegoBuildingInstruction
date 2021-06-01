@@ -1,7 +1,7 @@
 # Lego Building Instructions
 ![Example screenshot](./aspnetcore.png)
 
-
+Web page Url: https://legobuildinginstruction.azurewebsites.net/
 
 ## Table of contents
 * [General info](#general-info)
