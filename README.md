@@ -31,10 +31,11 @@ The application allows you to view, upload Lego robot building instructions, dow
 - <strike>Login</strike>
 - <strike>Comment system</strike>
 - <strike>Upload Instructions</strike>
-- Admin panel
+- <strike>Admin panel</strike>
+- <strike>Deploy to Azure</strike>
 - Rest API
 - Testing
-- Deploy to Azure
+
 
 
 ## Contact
